@@ -38,7 +38,9 @@ async function getSession(key){
 
     let sd  = await session.find({key:key})
 
-    return sd
+    let resultData = await sd.toArray()
+    return resultData[0]
+
 }
 
 //function for deleting the session.

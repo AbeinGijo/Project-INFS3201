@@ -57,7 +57,8 @@ app.get('/admin',async(req,res) =>{
         return
     }
     let sd = await business.getSession(sessionKey)
-    if (!sd || sd.data.type!=='admin') {
+
+    if (!sd || sd.data.type !=='admin') {
         res.redirect("/login?session=true")
         return
     }
