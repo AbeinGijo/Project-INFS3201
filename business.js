@@ -12,7 +12,7 @@ function computeHash(p){
 async function attemptLogin(username,password){
     let details = await persistence.getUserDetails(username)
     password = computeHash(password)
-    console.log(password)
+
     if(!details || details.password !=  password){
         return undefined
     }
@@ -25,6 +25,8 @@ async function attemptLogin(username,password){
             type:details.AccountType
         }
     }
+    await persistence.startSession(sd)
+    return sd
 }
 
 
@@ -45,16 +47,13 @@ async function getSession(key) {
 }
 
 
-async function getSession(key){
-    return await persistence.getSession(key)
-}
 
 async function terminateSession(key){
     return await persistence.deleteSession(key)
 }
 
 module.exports = {
-    startSession,
+
     getSession,
     terminateSession,
     attemptLogin,getCatSites
