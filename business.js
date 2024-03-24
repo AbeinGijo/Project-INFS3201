@@ -1,3 +1,4 @@
+
 const persistence= require('./persistence.js')
 const crypto = require('crypto')
 
@@ -24,9 +25,9 @@ async function attemptLogin(username,password){
             type:details.AccountType
         }
     }
-    await persistence.startSession(sd)
-    return sd
 }
+
+
 
 async function getCatSites(){
     return await persistence.getCatSites()
@@ -43,6 +44,19 @@ async function getSession(key) {
     return await persistence.getSession(key)
 }
 
-module.exports={
-    attemptLogin,getCatSites,getSession,terminateSession
+
+async function getSession(key){
+    return await persistence.getSession(key)
+}
+
+async function terminateSession(key){
+    return await persistence.deleteSession(key)
+}
+
+module.exports = {
+    startSession,
+    getSession,
+    terminateSession,
+    attemptLogin,getCatSites
+
 }
