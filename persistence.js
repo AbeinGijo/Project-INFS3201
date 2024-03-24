@@ -1,7 +1,9 @@
+const { MongoClient } = require('mongodb')
 const mongodb = require('mongodb')
 
 let client= undefined
 let db = undefined 
+let users=undefined
 let session = undefined
 let catloc = undefined
 
@@ -10,6 +12,7 @@ async function connectDatabase(){
         client = await  new MongoClient("mongodb+srv://basharsoad:12class34@cluster0.d6lyly6.mongodb.net/")
         await client.connect()
         db = client.db("project")
+        users=db.collection('UserAccounts')
         session = db.collection("sessionData")
         catloc = db.collection("catlocation")
 
@@ -22,7 +25,7 @@ async function startSession(sd){
     await connectDatabase()
     let db = client.db("project")
     let session = db.collection('sessionData')
-    await session.insertOnt(sd)
+    await session.insertOne(sd)
 }
 
 
@@ -38,11 +41,10 @@ async function saveSession(uuid, expiry, data){
 
 async function getSession(key){
     await connectDatabase()
-    let db = client.db('project')
-    let session = db.collection('sessionData')
-    let final_session  = await session.find({sessionNumber:key})
-    let result = await final_session.toArray()
-    return result[0]
+
+    let sd  = await session.find({key:key})
+
+    return sd
 }
 
 //function for deleting the session.
@@ -55,9 +57,25 @@ async function deleteSession(key){
     await session.deleteOne({sessionNumber:key})
 }
 
+async function getUserDetails(username) {
+    await connectDatabase()
+    let result = await users.find({ username: username })
+    let resultData = await result.toArray()
+    return resultData[0]
+}
+
+async function getCatSites(){
+    await connectDatabase()
+    let result = await catloc.find()
+    let resultData = await result.toArray()
+    return resultData
+}
+
 module.exports = {
     startSession,
     saveSession,
     getSession,
     deleteSession,
+    getUserDetails,
+    getCatSites
 }
