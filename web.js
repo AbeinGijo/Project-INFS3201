@@ -57,7 +57,7 @@ app.get('/admin',async(req,res) =>{
         return
     }
     let sd = await business.getSession(sessionKey)
-    if (!sd) {
+    if (!sd || sd.data.type!=='admin') {
         res.redirect("/login?session=true")
         return
     }
@@ -72,7 +72,7 @@ app.get('/member',async(req,res) =>{
         return
     }
     let sd = await business.getSession(sessionKey)
-    if (!sd) {
+    if (!sd|| sd.data.type!=='standard') {
         res.redirect("/login?session=true")
         return
     }

@@ -29,12 +29,6 @@ async function startSession(sd){
 }
 
 
-//function to save session.
-async function saveSession(uuid, expiry, data){
-    let db =await connectDatabase()
-    await db[1].replaceOne({SessionKey:uuid, expiry:expiry, data:data})
-}
-
 
 // finding the session based on the session key.
 // The 'getSession' function retrieves a session based on the session key
@@ -73,7 +67,7 @@ async function getCatSites(){
 
 module.exports = {
     startSession,
-    saveSession,
+
     getSession,
     deleteSession,
     getUserDetails,
