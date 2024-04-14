@@ -81,7 +81,20 @@ app.get('/member',async(req,res) =>{
     res.render('member')
 
 })
+app.post('/member',async(req,res) =>{
+    let sessionKey = req.cookies.session
+    if (!sessionKey) {
+        res.redirect('/login?session=true')
+        return
+    }
+    let sd = await business.getSession(sessionKey)
+    if (!sd|| sd.data.type!=='standard') {
+        res.redirect("/login?session=true")
+        return
+    }
+    console.log(req.body)
 
+})    
 
 // Reset password route and use
 
