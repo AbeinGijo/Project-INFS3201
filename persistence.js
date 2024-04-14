@@ -67,9 +67,23 @@ async function getCatSites(){
     return resultData
 }
 
+//password reset
+async function findEmail(email){
+    await connectDatabase()
+    let result = await users.findOne({email:email})
+    return result
+}
+
+async function updatePassword(email,password){
+    await connectDatabase()
+    password = await computeHash(password)
+    await users.updateOne({email:email},{$set:{password:password}})
+}
+
 module.exports = {
     startSession,
-
+    findEmail,
+    updatePassword,
     getSession,
     deleteSession,
     getUserDetails,
