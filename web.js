@@ -80,6 +80,41 @@ app.get('/member',async(req,res) =>{
     res.render('member')
 
 })
+// Reset password route and use
+
+app.get('/reset',(req,res)=>{
+    res.render('reset',{layout:undefined, message:req.query.message})
+  })
+
+  app.post("/reset", async (req,res)=> {
+    let email = req.body.email    //reading email from body
+    let change_password = req.body.change_password  //reading the changed passwordfrom body
+    let new_password = req.body.new_password    //reading new password from body
+    let message = req.query.message
+
+
+    let check  = await business.findEmail(email)    //checking email 
+    if (check){
+      let change = prompt("Will you change your password?(yes/no):")
+
+      if(change === "yes"){
+        if (new_password === change_password){
+            await business.updatePassword(email,new_password)
+            res.redirect("/?message=Password Reset is complete!")
+        }else{
+            res.redirect("/reset?message=Password Does not match with the given password")
+        }
+        return
+
+      }
+      else
+      {
+        res.redirect("/reset?message=Email has not been found here!")
+      }
+    }
+    res.redirect("/reset?message=Email has not been found here!")
+  })
+  
 
 app.listen(8000, () => {
     console.log("Application has started")
