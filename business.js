@@ -19,7 +19,7 @@ async function attemptLogin(username,password){
     let sessionKey = crypto.randomUUID()
     let sd = {
         key: sessionKey,
-        expiry: new Date(Date.now() + 1000*60*5),
+        expiry: new Date(Date.now() + 1000*60*15),
         data: {
             username: details.user,
             type:details.AccountType
