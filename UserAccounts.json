@@ -1,20 +1,36 @@
-[{
+  [{
+    "_id": {
+      "$oid": "6090b43b3f57a5c1d8b4f5e6"
+    },
     "username": "syambashar",
+    "email": "syam@abc.com",
     "password": "syam1234",
     "AccountType": "admin"
   },
   {
+    "_id": {
+      "$oid": "6090b43b3f57a5c1d8b4f5e7"
+    },
+    "username": "faizjabir",
+    "email": "faiz@abc.com",
+    "password": "faiz123",
+    "AccountType": "standard"
+  },
+  {
+    "_id": {
+      "$oid": "6090b43b3f57a5c1d8b4f5e8"
+    },
     "username": "Abiengijo",
+    "email": "abien@abc.com",
     "password": "abien1234",
     "AccountType": "admin"
   },
   {
-    "username": "faizjabir",
-    "password": "faiz1234",
-    "AccountType": "standard"
-  },
-  {
+    "_id": {
+      "$oid": "6090b43b3f57a5c1d8b4f5e9"
+    },
     "username": "keshobsarkar",
+    "email": "keshob@abc.com",
     "password": "keshob1234",
     "AccountType": "standard"
   }]

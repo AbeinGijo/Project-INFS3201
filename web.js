@@ -81,11 +81,7 @@ app.get('/member',async(req,res) =>{
     res.render('member')
 
 })
-
-
-
 // Reset password route and use
-
 app.get('/reset',(req,res)=>{
     res.render('reset',{layout:undefined, message:req.query.message})
   })
@@ -122,7 +118,7 @@ app.get('/reset',(req,res)=>{
 
 app.use(function(req,res){
     res.status(404).render('404',{layout:undefined});
-});
+})
 
 app.listen(8000, () => {
     console.log("Application has started")
