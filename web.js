@@ -81,8 +81,6 @@ app.get('/member',async(req,res) =>{
 
 })
 
-
-
 app.listen(8000, () => {
     console.log("Application has started")
 })

@@ -52,8 +52,18 @@ async function terminateSession(key){
     return await persistence.deleteSession(key)
 }
 
-module.exports = {
+// password reset
+async function findEmail(email){
+    return await persistence.findEmail(email)
+  }
+  async function updatePassword(email,password){
+    return await persistence.updatePassword(email,password)
+  }
 
+module.exports = {
+    startSession,
+    findEmail,
+    updatePassword,
     getSession,
     terminateSession,
     attemptLogin,getCatSites
