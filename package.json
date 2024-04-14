@@ -3,7 +3,7 @@
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "crypto": "^1.0.1",
-    "express": "^4.19.1",
+    "express": "^4.19.2",
     "express-handlebars": "^7.1.2",
     "mongodb": "^6.5.0",
     "prompt-sync": "^4.2.0"
