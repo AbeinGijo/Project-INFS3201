@@ -137,6 +137,25 @@ app.use(function(req,res){
     res.status(404).render('404',{layout:undefined});
 })
 
+
+
+app.get('/admin/dashboard', async (req, res) => {
+    const sessionKey = req.cookies.session;
+    if (!sessionKey) {
+      res.redirect('/login?session=true');
+      return;
+    }
+  
+    const sessionData = await business.getSession(sessionKey);
+    if (!sessionData || sessionData.data.type !== 'admin') {
+      res.redirect('/login?session=true');
+      return;
+    }
+  
+ 
+    const feedingStations = await business.getCatSites();
+    res.render('dashboard', { layout: undefined, feedingStations }); 
+  });
 app.listen(8000, () => {
     console.log("Application has started")
 })
