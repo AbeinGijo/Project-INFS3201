@@ -4,6 +4,7 @@ const business = require('./business.js')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const handlebars = require('express-handlebars')
+const prompt = require('prompt-sync')()
 const path = require('path')
 
 let app = express()

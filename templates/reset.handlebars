@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Login</title>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+
+    <!-- Vendors styles-->
+    <link rel="stylesheet" href="vendors/simplebar/css/simplebar.css">
+    <link rel="stylesheet" href="css/vendors/simplebar.css">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/examples.css" rel="stylesheet">
+
+    <!-- Adds custom styling for the #error element -->
+    <style>
+      #error{
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Adds a light background color and centers the content vertically and horizontally -->
+    <div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="card-group d-block d-md-flex row">
+              <div class="card col-md-7 p-4 mb-0">
+                <div class="card-body">
+
+                  <!-- Adds a heading and a paragraph with medium emphasis -->
+                  <h1>Reset Password</h1>
+                  <p class="text-medium-emphasis">Sign In to your account</p>
+
+                  <!-- Checks if there's a message and displays it if there is -->
+                  {{#if message}}
+                    <p id="error">{{message}}</p>
+                  {{/if}}
+
+                  <!-- Adds a form for user input -->
+                  <form method="POST">
+                    <div class="input-group mb-3"><span class="input-group-text">
+                        <!-- Adds an icon for the input field -->
+                        <svg class="icon">
+                          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
+                        </svg></span>
+                      <!-- Adds an input field for the email -->
+                      <input class="form-control" type="text" name="email" placeholder="email">
+                    </div>
+                    <div class="input-group mb-4"><span class="input-group-text">
+                        <!-- Adds an icon for the input field -->
+                        <svg class="icon">
+                          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
+                        </svg></span>
+                      <!-- Adds an input field for the password -->
+                      <input class="form-control" type="password" name="new_password" placeholder="Password">
+                    </div>
+                    <div class="input-group mb-4"><span class="input-group-text">
+                        <!-- Adds an icon for the input field -->
+                        <svg class="icon">
+                          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
+                        </svg></span>
+                      <!-- Adds an input field for the confirm password -->
+                      <input class="form-control" type="password" name="change_password" placeholder="Confirm change Password">
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <!-- Adds a submit button -->
+                        <input class="btn btn-primary px-4" type="submit" value="Reset & Login">
+                      </div>
+                      <div class="col-6 text-end">
+                        <!-- Adds a link to reset the password -->
+                        <button class="btn btn-link px-0" type="button" onclick=location.href="/reset">Reset password?</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="card col-md-5 text-white bg-primary py-5">
+                <div class="card-body text-center">
+                  <div>
+                    <!-- Adds a heading and a paragraph -->
+                    <h2>Register/Sign up here! </h2>
+                    <p> To sign up for our service, simply enter your email address and choose a password in the form below. We'll send you a confirmation email to verify your account. Once you've confirmed your email, you'll be able to log in and start using our service.</p>
+                    <!-- Adds a button to register -->
+                    <button class="btn btn-lg btn-outline-light mt-3" type="button" onclick=location.href="/register">Register Now!</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Adds external JavaScript files for functionality -->
+    <script src="/css/vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
+    <script src="/css/vendors/simplebar/js/simplebar.min.js"></script>
+    <script>
+    </script>
+  </body>
+</html>

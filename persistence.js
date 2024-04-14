@@ -76,7 +76,7 @@ async function findEmail(email){
 
 async function updatePassword(email,password){
     await connectDatabase()
-    password = await computeHash(password)
+    // password = await computeHash(password)
     await users.updateOne({email:email},{$set:{password:password}})
 }
 
