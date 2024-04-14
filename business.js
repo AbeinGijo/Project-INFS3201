@@ -61,7 +61,6 @@ async function findEmail(email){
   }
 
 module.exports = {
-    startSession,
     findEmail,
     updatePassword,
     getSession,

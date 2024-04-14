@@ -13,6 +13,7 @@ app.engine('handlebars', handlebars.engine())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(cookieParser())
 app.use('/css', express.static(__dirname + "/css"))
+app.use('/assets', express.static(__dirname + "/assets"))
 
 
 app.get('/',async (req,res) =>{
@@ -80,6 +81,23 @@ app.get('/member',async(req,res) =>{
     res.render('member')
 
 })
+
+app.post('/member',async(req,res) =>{
+    let sessionKey = req.cookies.session
+    if (!sessionKey) {
+        res.redirect('/login?session=true')
+        return
+    }
+    let sd = await business.getSession(sessionKey)
+    if (!sd|| sd.data.type!=='standard') {
+        res.redirect("/login?session=true")
+        return
+    }
+    console.log(req.body)
+
+})
+
+
 // Reset password route and use
 
 app.get('/reset',(req,res)=>{
@@ -113,8 +131,12 @@ app.get('/reset',(req,res)=>{
       }
     }
     res.redirect("/reset?message=Email has not been found here!")
-  })
-  
+  }
+)
+
+app.use(function(req,res){
+    res.status(404).render('404',{layout:undefined});
+});
 
 app.listen(8000, () => {
     console.log("Application has started")
