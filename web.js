@@ -80,8 +80,8 @@ app.get('/member',async(req,res) =>{
     res.render('member')
 
 })
-// Reset password route and use
 
+// Reset password route and use
 app.get('/reset',(req,res)=>{
     res.render('reset',{layout:undefined, message:req.query.message})
   })
