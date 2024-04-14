@@ -81,12 +81,16 @@ app.get('/member',async(req,res) =>{
     res.render('member')
 
 })
+
+
 // Reset password route and use
+
 app.get('/reset',(req,res)=>{
     res.render('reset',{layout:undefined, message:req.query.message})
-  })
+}
+)
 
-  app.post("/reset", async (req,res)=> {
+app.post("/reset", async (req,res)=> {
     let email = req.body.email    //reading email from body
     let change_password = req.body.change_password  //reading the changed passwordfrom body
     let new_password = req.body.new_password    //reading new password from body
