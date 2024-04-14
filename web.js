@@ -77,7 +77,7 @@ app.get('/member',async(req,res) =>{
         res.redirect("/login?session=true")
         return
     }
-    res.render('member',{layout:undefined})
+    res.render('member')
 
 })
 
