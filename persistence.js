@@ -3,6 +3,9 @@ const mongodb = require('mongodb')
 const crypto = require('crypto')
 
 
+const fs = require('fs').promises;
+const fs1= require('fs')
+
 let client= undefined
 let db = undefined 
 let users=undefined
@@ -107,6 +110,23 @@ async function updatePassword(email,password){
     await users.updateOne({email:email},{$set:{password:password}})
 }
 
+async function uploadReport(data,file){
+    await connectDatabase()
+    if (!fs1.existsSync(`${__dirname}/uploads`)){
+        fs1.mkdirSync(`${__dirname}/uploads`);
+    }
+    let binaryData = await fs.readFile(file.path)
+    data.image=binaryData
+    console.log(data)
+    let result = await catloc.insertOne(data);
+    console.log("Image Uploaded")
+    let files = await fs.readdir(`${__dirname}/uploads`)
+    for(f of files){
+        await fs.unlink(`${__dirname}/uploads/${f}`)
+    }
+    return result
+}
+
 module.exports = {
     startSession,
     findEmail,
@@ -114,7 +134,5 @@ module.exports = {
     getSession,
     deleteSession,
     getUserDetails,
-    getCatSites,
-    updateNewuser,
-    registerAccount
+    getCatSites
 }

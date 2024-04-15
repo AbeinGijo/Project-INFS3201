@@ -3,10 +3,13 @@ const business = require('./business.js')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const handlebars = require('express-handlebars')
+const fs1= require('fs')
 const prompt = require('prompt-sync')()
-const path = require('path')
+const multer  = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 let app = express()
+
 app.set('views', __dirname+"/templates")
 app.set('view engine', 'handlebars')
 app.engine('handlebars', handlebars.engine())
@@ -77,10 +80,13 @@ app.get('/member',async(req,res) =>{
         res.redirect("/login?session=true")
         return
     }
-    res.render('member')
+    if (!fs1.existsSync(`${__dirname}/uploads`)){
+        fs1.mkdirSync(`${__dirname}/uploads`);
+    }
+    res.render('member',{pageTitle:'Member Page'})
 
 })
-app.post('/member',async(req,res) =>{
+app.post('/member',upload.single('image'),async(req,res) =>{
     let sessionKey = req.cookies.session
     if (!sessionKey) {
         res.redirect('/login?session=true')
@@ -91,7 +97,10 @@ app.post('/member',async(req,res) =>{
         res.redirect("/login?session=true")
         return
     }
+    
     let data= req.body
+
+
 })    
 
 // Get request for the reset password page
@@ -139,7 +148,12 @@ app.post("/reset", async (req,res)=> {
     }
     // Redirect to the reset password page with an error message
     res.redirect("/reset?message=Email has not been found here!")
-})
+  }
+)
+
+
+
+
 
 app.get('/dashboard', async (req, res) => {
     console.log("Ok")
@@ -162,8 +176,6 @@ app.get('/dashboard', async (req, res) => {
 
  
 })
-
-
 
 app.use(function(req,res){
     res.status(404).render('404',{layout:undefined});
