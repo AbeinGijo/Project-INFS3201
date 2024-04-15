@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(cookieParser())
 app.use('/css', express.static(__dirname + "/css"))
 app.use('/assets', express.static(__dirname + "/assets"))
+app.use('/vendors', express.static(__dirname + "/vendors"))
 
 
 app.get('/',async (req,res) =>{
@@ -93,7 +94,8 @@ app.post('/member',async(req,res) =>{
         res.redirect("/login?session=true")
         return
     }
-    console.log(req.body)
+    let data= req.body
+
 
 })    
 
@@ -156,7 +158,10 @@ app.get('/admin/dashboard', async (req, res) => {
  
     const feedingStations = await business.getCatSites();
     res.render('dashboard', { layout: undefined, feedingStations }); 
-  });
+ 
+})
+
+
 app.listen(8000, () => {
     console.log("Application has started")
 })
