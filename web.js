@@ -1,4 +1,3 @@
-
 const express=require('express')
 const business = require('./business.js')
 const bodyParser = require('body-parser')
@@ -16,13 +15,11 @@ app.use(cookieParser())
 app.use('/css', express.static(__dirname + "/css"))
 app.use('/assets', express.static(__dirname + "/assets"))
 
-
 app.get('/',async (req,res) =>{
     let catloc = await business.getCatSites()
     res.render('catloc',{layout:undefined,
                             catLocs: catloc})
 })
-
 
 
 app.get('/login',(req,res) =>{
@@ -110,7 +107,6 @@ app.post("/reset", async (req,res)=> {
     let new_password = req.body.new_password    //reading new password from body
     let message = req.query.message
 
-
     let check  = await business.findEmail(email)    //checking email 
     if (check){
       let change = prompt("Will you change your password?(yes/no):")
@@ -139,7 +135,6 @@ app.use(function(req,res){
 })
 
 
-
 app.get('/admin/dashboard', async (req, res) => {
     const sessionKey = req.cookies.session;
     if (!sessionKey) {
@@ -157,6 +152,10 @@ app.get('/admin/dashboard', async (req, res) => {
     const feedingStations = await business.getCatSites();
     res.render('dashboard', { layout: undefined, feedingStations }); 
   });
+
+
+
+  
 app.listen(8000, () => {
     console.log("Application has started")
 })
