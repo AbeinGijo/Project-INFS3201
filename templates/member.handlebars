@@ -128,7 +128,12 @@
     </header>
     <div class="body flex-grow-1 px-3"></div>
 <h1>Member Page</h1>
-
+{{#if message}}
+  <div class="alert alert-primary" role="alert">
+    <strong>{{message}}</strong>
+  </div>
+  
+{{/if}}
 <form method="post" action="/member" enctype="multipart/form-data">
   <div class="mb-3">
     <label for="feedingLocId" class="form-label">Feeding Location</label>
@@ -147,8 +152,8 @@
     <input type="text" class="form-control" id="issues" name="issues"><br>
     
     <div class="mb-3">
-    <label for="formFile" class="form-label">Upload Photo(Optional)</label>
-    <input class="form-control" type="file" id="formFile" name="file">
+    <label class="form-label">Upload Photo(Optional)</label>
+    <input class="form-control" type="file"  name="image">
     </div>
 
     <div class="col-auto">
