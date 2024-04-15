@@ -119,9 +119,10 @@ app.post("/reset", async (req,res)=> {
       if(change === "yes"){
         if (new_password === change_password){
             await business.updatePassword(email,new_password)
+            console.log(`Your password has been changed from ${req.body.new_password} sucessfully, congratulation! You can continue to navigate now.`)
             res.redirect("/?message=Password Reset is complete!")
         }else{
-            res.redirect("/reset?message=Password Does not match with the given password")
+            res.redirect("/reset?message=Password does not match with the given password!")
         }
         return
 

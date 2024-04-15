@@ -1,5 +1,7 @@
 const { MongoClient } = require('mongodb')
 const mongodb = require('mongodb')
+const crypto = require('crypto')
+
 
 let client= undefined
 let db = undefined 
@@ -76,7 +78,6 @@ async function findEmail(email){
 
 async function updatePassword(email,password){
     await connectDatabase()
-    // password = await computeHash(password)
     await users.updateOne({email:email},{$set:{password:password}})
 }
 

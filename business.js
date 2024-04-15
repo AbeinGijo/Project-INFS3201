@@ -8,11 +8,9 @@ function computeHash(p){
     return hash.digest('hex')
 }
 
-
 async function attemptLogin(username,password){
     let details = await persistence.getUserDetails(username)
     password = computeHash(password)
-
     if(!details || details.password !=  password){
         return undefined
     }
@@ -57,6 +55,7 @@ async function findEmail(email){
     return await persistence.findEmail(email)
   }
   async function updatePassword(email,password){
+    password = computeHash(password)
     return await persistence.updatePassword(email,password)
   }
 
