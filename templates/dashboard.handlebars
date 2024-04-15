@@ -5,52 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: aliceblue;
-        }
 
-        h1 {
-            color: #333;
-            text-align: center;
-            font-size: 50px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            
-        }
-
-        th, td {
-            border: 1px solid #478ad7;
-            padding: 8px;
-            text-align: left;
-            font-size: xx-large;
-               text-align: center;
-        }
-
-        th {
-            background-color: #dd7c7c;
-            font-size: 40px
-         
-        }
-
-        tr:nth-child(even) {
-            background-color: #65acd0;
-        }
-        
-
-        tr:hover {
-            background-color: #ded49d;
-        }
-    </style>
 </head>
 <body>
     <h1>Feeding Station Dashboard</h1>
-    <table>
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Location</th>
@@ -68,7 +27,7 @@
   <td>{{this.size}}</td>
   <td>{{this.foodLevel}}</td>
   <td>{{this.waterLevel}}</td>
- <td>{{  this.lastVisited}}</td>
+ <td>{{  this.lastVisitDate}}</td>
   <td>{{this.status}}</td>
 </tr>
 {{/each}}
@@ -78,8 +37,3 @@
 
 </body>
 </html>
-
-<li class="nav-item"><a class="nav-link" href="/admin/dashboard">
-            <svg class="nav-icon">
-              <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
-            </svg> Dashboard<span class="badge badge-sm bg-info ms-auto">NEW</span></a></li>

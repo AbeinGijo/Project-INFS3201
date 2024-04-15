@@ -153,7 +153,7 @@ app.get('/dashboard', async (req, res) => {
   
  
     let feedingStations = await business.getCatSites();
-    res.render('dashboard', { layout: undefined, feedingStations }); 
+    res.render('dashboard', {  feedingStations }); 
 
  
 })
