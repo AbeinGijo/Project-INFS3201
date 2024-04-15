@@ -3,10 +3,11 @@ const business = require('./business.js')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const handlebars = require('express-handlebars')
+const fileUpload=require('express-fileupload')
 const prompt = require('prompt-sync')()
-const path = require('path')
 
 let app = express()
+app.use(fileUpload())
 app.set('views', __dirname+"/templates")
 app.set('view engine', 'handlebars')
 app.engine('handlebars', handlebars.engine())
@@ -77,7 +78,7 @@ app.get('/member',async(req,res) =>{
         res.redirect("/login?session=true")
         return
     }
-    res.render('member')
+    res.render('member',{pageTitle:'Member Page'})
 
 })
 app.post('/member',async(req,res) =>{
@@ -92,6 +93,8 @@ app.post('/member',async(req,res) =>{
         return
     }
     let data= req.body
+    console.log(data)
+    console.log(req.files)
 
 
 })    
@@ -132,10 +135,6 @@ app.post("/reset", async (req,res)=> {
   }
 )
 
-
-
-
-
 app.get('/dashboard', async (req, res) => {
     console.log("Ok")
     let sessionKey = req.cookies.session;
@@ -157,8 +156,6 @@ app.get('/dashboard', async (req, res) => {
 
  
 })
-
-
 
 app.use(function(req,res){
     res.status(404).render('404',{layout:undefined});
