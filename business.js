@@ -27,7 +27,12 @@ async function attemptLogin(username,password){
     return sd
 }
 
-
+async function registerAccount(account) {
+    return await persistence.registerAccount(account);
+  }
+async function updateNewuser(username,date){
+    return await persistence.updateNewuser(username,date)
+}
 
 async function getCatSites(){
     return await persistence.getCatSites()
@@ -64,6 +69,10 @@ module.exports = {
     updatePassword,
     getSession,
     terminateSession,
-    attemptLogin,getCatSites
+    computeHash,
+    attemptLogin,
+    getCatSites,
+    registerAccount,
+    updateNewuser
 
 }

@@ -92,50 +92,54 @@ app.post('/member',async(req,res) =>{
         return
     }
     let data= req.body
-
-
 })    
 
-// Reset password route and use
-
+// Get request for the reset password page
 app.get('/reset',(req,res)=>{
+    // Render the reset password page with no layout and an optional message
     res.render('reset',{layout:undefined, message:req.query.message})
-}
-)
+})
 
+// Post request for the reset password page
 app.post("/reset", async (req,res)=> {
+    // Get the form data from the request body
     let email = req.body.email    //reading email from body
     let change_password = req.body.change_password  //reading the changed passwordfrom body
     let new_password = req.body.new_password    //reading new password from body
     let message = req.query.message
 
+    // Check if the email exists in the system
     let check  = await business.findEmail(email)    //checking email 
     if (check){
-      let change = prompt("Will you change your password?(yes/no):")
+        // Prompt the user to confirm if they want to change their password
+        let change = prompt("Will you change your password?(yes/no):")
 
-      if(change === "yes"){
-        if (new_password === change_password){
-            await business.updatePassword(email,new_password)
-            console.log(`Your password has been changed from ${req.body.new_password} sucessfully, congratulation! You can continue to navigate now.`)
-            res.redirect("/?message=Password Reset is complete!")
-        }else{
-            res.redirect("/reset?message=Password does not match with the given password!")
+        // Check if the user confirmed to change their password
+        if(change === "yes"){
+            // Check if the new password and confirmation password match
+            if (new_password === change_password){
+                // Update the user's password
+                await business.updatePassword(email,new_password)
+                // Log a success message
+                console.log(`Your password has been changed from ${req.body.new_password} sucessfully, congratulation! You can continue to navigate now.`)
+                // Redirect to the home page with a success message
+                res.redirect("/?message=Password Reset is complete!")
+            }else{
+                // Redirect to the reset password page with an error message
+                res.redirect("/reset?message=Password does not match with the given password!")
+            }
+            return
+
         }
-        return
-
-      }
-      else
-      {
-        res.redirect("/reset?message=Email has not been found here!")
-      }
+        else
+        {
+            // Redirect to the reset password page with an error message
+            res.redirect("/reset?message=Email has not been found here!")
+        }
     }
+    // Redirect to the reset password page with an error message
     res.redirect("/reset?message=Email has not been found here!")
-  }
-)
-
-
-
-
+})
 
 app.get('/dashboard', async (req, res) => {
     console.log("Ok")

@@ -69,6 +69,32 @@ async function getCatSites(){
     return resultData
 }
 
+// Function to update the last login date for a user
+async function updateNewuser(username, date) {
+    // Connect to the database
+    await connectDatabase();
+    // Update the user's last login date in the database
+    await users.updateOne({ username: username }, { $set: { last_login: date } });
+}
+
+// Function to register a new user
+async function registerAccount(user) { //adds the whole object containing user data
+    // Connect to the database
+    await connectDatabase();
+    // Check if the username or email already exists in the database
+    let verifyName = await users.findOne({ username: user.username });
+    let verifyEmail = await users.findOne({ email: user.email });
+
+    // If the username or email already exists, return undefined
+    if (verifyName || verifyEmail) {
+        return undefined;
+    }
+    // If the username and email do not exist, add the user to the database
+    else {
+        return await users.insertOne(user); //if not registered then add user data to database
+    }
+}
+
 //password reset
 async function findEmail(email){
     await connectDatabase()
@@ -88,5 +114,7 @@ module.exports = {
     getSession,
     deleteSession,
     getUserDetails,
-    getCatSites
+    getCatSites,
+    updateNewuser,
+    registerAccount
 }
