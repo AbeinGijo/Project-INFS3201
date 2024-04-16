@@ -20,7 +20,7 @@ async function connectDatabase(){
         users=db.collection('UserAccounts')
         session = db.collection("sessionData")
         catloc = db.collection("catlocation")
-
+        urgloc=db.collection("urgent")
         return db
     }
 }
@@ -68,6 +68,12 @@ async function getUserDetails(username) {
 async function getCatSites(){
     await connectDatabase()
     let result = await catloc.find()
+    let resultData = await result.toArray()
+    return resultData
+}
+async function getUrgentSites(){
+    await connectDatabase()
+    let result = await  urgloc.find()
     let resultData = await result.toArray()
     return resultData
 }
@@ -134,5 +140,6 @@ module.exports = {
     getSession,
     deleteSession,
     getUserDetails,
-    getCatSites
+    getCatSites,
+    getUrgentSites
 }

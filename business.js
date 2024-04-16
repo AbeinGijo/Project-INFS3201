@@ -37,6 +37,9 @@ async function updateNewuser(username,date){
 async function getCatSites(){
     return await persistence.getCatSites()
 }
+async function getUrgentSites(){
+    return await persistence.getUrgentSites() 
+}
 
 async function terminateSession(key) {
     if (!key) {
@@ -57,8 +60,15 @@ async function terminateSession(key){
 
 // password reset
 async function findEmail(email){
-   return await persistence.findEmail(email)
-}
+
+    return await persistence.findEmail(email)
+  }
+  async function updatePassword(email,password){
+    return await persistence.updatePassword(email,password)
+  }
+  
+
+
 async function updatePassword(email,password){
    password = computeHash(password)
    return await persistence.updatePassword(email,password)
@@ -68,11 +78,12 @@ async function uploadReport(data,file){
     return await persistence.uploadReport(data,file)
 }
 
+
 module.exports = {
     findEmail,
     updatePassword,
     getSession,
     terminateSession,
-    attemptLogin,getCatSites
-
+    attemptLogin,getCatSites,
+    getUrgentSites
 }

@@ -180,6 +180,28 @@ app.get('/dashboard', async (req, res) => {
  
 })
 
+
+app.get('/urgent', async (req, res) => {
+    console.log("Urgent  requested");
+    let sessionKey = req.cookies.session;
+  
+    if (!sessionKey) {
+      res.redirect('/login?session=true');
+      return;
+    }
+  
+    let sessionData = await business.getSession(sessionKey);
+    if (!sessionData || sessionData.data.type !== 'admin') {
+      res.redirect('/login?session=true');
+      return;
+    }
+  
+    let urgentItems = await business.getUrgentSites();
+    res.render('urgent', { urgentItems });
+  });
+  
+
+
 app.use(function(req,res){
     res.status(404).render('404',{layout:undefined});
 })

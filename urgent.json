@@ -1,0 +1,55 @@
+[
+    {
+      "location": "Ainkhalid",
+      "category": "Medical",
+      "description": "One of the cats at the feeding station appears to be injured, requires immediate veterinary attention."
+    },
+    {
+      "location": "Ummghuwailina",
+      "category": "Feeding Station Problem",
+      "description": "The feeding station equipment is malfunctioning, urgent repair needed to ensure proper food distribution."
+    },
+    {
+      "location": "Wakra",
+      "category": "Food",
+      "description": "Food supply is dangerously low, requires immediate refill to prevent starvation among the cats."
+    },
+    {
+      "location": "Dukhan",
+      "category": "Water",
+      "description": "Water dispenser at the feeding station is broken, immediate replacement or repair needed."
+    },
+    {
+      "location": "Mansoura",
+      "category": "Medical",
+      "description": "Several cats at the feeding station are showing symptoms of illness, need veterinary assessment and treatment."
+    },
+    {
+      "location": "Bu Hamour",
+      "category": "Feeding Station Problem",
+      "description": "The feeding station gate is stuck, preventing cats from accessing food, urgent repair required."
+    },
+    {
+      "location": "Al Khawr",
+      "category": "Feeding Station Problem",
+      "description": "The feeding station roof is damaged, exposing food to weather, urgent repair needed to prevent spoilage."
+     
+    },
+    {
+      "location": "Ar Rayyan",
+      "category": "Water",
+      "description": "Water source at the feeding station is contaminated, immediate replacement or purification needed."
+    },
+    {
+      "location": "Umm Bab",
+      "category": "Food",
+      "description": "Food supply is critically low, immediate refill required to prevent hunger and malnutrition."
+      
+    },
+    {
+      "location": "Umm Salal",
+      "category": "Medical",
+      "description": "A cat at the feeding station is displaying severe symptoms of dehydration, immediate medical attention required."
+    }
+  ]
+  
