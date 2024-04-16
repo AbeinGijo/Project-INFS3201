@@ -59,6 +59,8 @@ async function findEmail(email){
   async function updatePassword(email,password){
     return await persistence.updatePassword(email,password)
   }
+  
+
 
 module.exports = {
     findEmail,
@@ -66,5 +68,4 @@ module.exports = {
     getSession,
     terminateSession,
     attemptLogin,getCatSites
-
 }

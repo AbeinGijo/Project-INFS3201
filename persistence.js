@@ -15,7 +15,7 @@ async function connectDatabase(){
         users=db.collection('UserAccounts')
         session = db.collection("sessionData")
         catloc = db.collection("catlocation")
-
+        urgloc=db.collection("urgent")
         return db
     }
 }

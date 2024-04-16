@@ -9,9 +9,9 @@
 </head>
 <body>
     <h1>Feeding Station Dashboard</h1>
-    <table class="table table-striped">
+    <table class="table table-hover table-striped">
         <thead>
-            <tr>
+            <tr class="table-danger">
                 <th>Location</th>
                 <th>Size</th>
                 <th>Food Level</th>
@@ -20,7 +20,7 @@
                 <th>Status</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="table-info">
             {{#each feedingStations}}
 <tr>
   <td>{{this.location}}</td>
