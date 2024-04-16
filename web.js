@@ -125,12 +125,62 @@ app.post('/member',upload.single('image'),async(req,res) =>{
 
 })    
 
+
 function toString(x){
     return x.toString ('base64')    
 }  
 
 
 
+app.get("/register",async(req,res)=>{
+    // Render the register page with no layout and an optional message
+    res.render('register',{layout:undefined, message:req.query.message})
+})
+
+
+// Post request for the register page
+app.post('/register', async (req, res) =>{
+    // Get the form data from the request body
+    let name = req.body.username
+    let email = req.body.email
+    let pass = req.body.password
+    let confirmpass = req.body.confirm
+    let accType = req.body.account_type
+    console.log(accType)
+    
+    // Check if any of the required fields are empty
+    if (name == "" || email == "" || pass == "" || confirmpass == ""){
+        // Redirect to the register page with an error message
+        res.redirect("/register?message=please dont forget to fill all the fields properly!")
+        return
+    }
+  
+    // Check if the password and confirmation password match
+    if (pass == confirmpass){
+        // Hash the password
+        let hashedPass = await business.computeHash(pass)
+        // Create a new account object
+        let newaccount = {username: name, email: email, password: hashedPass, AccountType: accType}
+        // Register the new account
+        let signin = await business.registerAccount(newaccount)
+        // Check if the registration was successful
+        if (!signin){
+            // Redirect to the register page with an error message
+            res.redirect("/register?message=you are not eligible for signin because of having same username or email.")
+            return
+        }
+        else
+        {
+          // Redirect to the login page with a success message
+          res.redirect("/login?message=Welcome user! You have been registered to out community!")
+        }
+    }
+    else
+    {
+        // Redirect to the register page with an error message
+        res.redirect("/register?message=The passwords you entered have not matched!")
+    }
+})
 
 
 // Get request for the reset password page
