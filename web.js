@@ -80,9 +80,7 @@ app.get('/member',async(req,res) =>{
         res.redirect("/login?session=true")
         return
     }
-    if (!fs1.existsSync(`${__dirname}/uploads`)){
-        fs1.mkdirSync(`${__dirname}/uploads`);
-    }
+    
     res.render('member',{pageTitle:'Member Page'})
 
 })
@@ -99,7 +97,13 @@ app.post('/member',upload.single('image'),async(req,res) =>{
     }
     
     let data= req.body
-
+    data.username=sd.data.username
+    console.log(data)
+    console.log(req.files)
+    let file = req.file
+    if(await business.uploadReport(data,file)){
+        res.render('member',{pageTitle:'Member Page',message:"Report Updated"})
+    }
 
 })    
 
