@@ -1,5 +1,10 @@
 const { MongoClient } = require('mongodb')
 const mongodb = require('mongodb')
+const crypto = require('crypto')
+
+
+const fs = require('fs').promises;
+const fs1= require('fs')
 
 let client= undefined
 let db = undefined 
@@ -67,6 +72,32 @@ async function getCatSites(){
     return resultData
 }
 
+// Function to update the last login date for a user
+async function updateNewuser(username, date) {
+    // Connect to the database
+    await connectDatabase();
+    // Update the user's last login date in the database
+    await users.updateOne({ username: username }, { $set: { last_login: date } });
+}
+
+// Function to register a new user
+async function registerAccount(user) { //adds the whole object containing user data
+    // Connect to the database
+    await connectDatabase();
+    // Check if the username or email already exists in the database
+    let verifyName = await users.findOne({ username: user.username });
+    let verifyEmail = await users.findOne({ email: user.email });
+
+    // If the username or email already exists, return undefined
+    if (verifyName || verifyEmail) {
+        return undefined;
+    }
+    // If the username and email do not exist, add the user to the database
+    else {
+        return await users.insertOne(user); //if not registered then add user data to database
+    }
+}
+
 //password reset
 async function findEmail(email){
     await connectDatabase()
@@ -76,8 +107,24 @@ async function findEmail(email){
 
 async function updatePassword(email,password){
     await connectDatabase()
-    // password = await computeHash(password)
     await users.updateOne({email:email},{$set:{password:password}})
+}
+
+async function uploadReport(data,file){
+    await connectDatabase()
+    if (!fs1.existsSync(`${__dirname}/uploads`)){
+        fs1.mkdirSync(`${__dirname}/uploads`);
+    }
+    let binaryData = await fs.readFile(file.path)
+    data.image=binaryData
+    console.log(data)
+    let result = await catloc.insertOne(data);
+    console.log("Image Uploaded")
+    let files = await fs.readdir(`${__dirname}/uploads`)
+    for(f of files){
+        await fs.unlink(`${__dirname}/uploads/${f}`)
+    }
+    return result
 }
 
 module.exports = {

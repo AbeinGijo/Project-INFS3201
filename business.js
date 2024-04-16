@@ -8,11 +8,9 @@ function computeHash(p){
     return hash.digest('hex')
 }
 
-
 async function attemptLogin(username,password){
     let details = await persistence.getUserDetails(username)
     password = computeHash(password)
-
     if(!details || details.password !=  password){
         return undefined
     }
@@ -29,7 +27,12 @@ async function attemptLogin(username,password){
     return sd
 }
 
-
+async function registerAccount(account) {
+    return await persistence.registerAccount(account);
+  }
+async function updateNewuser(username,date){
+    return await persistence.updateNewuser(username,date)
+}
 
 async function getCatSites(){
     return await persistence.getCatSites()
@@ -54,12 +57,23 @@ async function terminateSession(key){
 
 // password reset
 async function findEmail(email){
+
     return await persistence.findEmail(email)
   }
   async function updatePassword(email,password){
     return await persistence.updatePassword(email,password)
   }
   
+
+
+async function updatePassword(email,password){
+   password = computeHash(password)
+   return await persistence.updatePassword(email,password)
+}
+
+async function uploadReport(data,file){
+    return await persistence.uploadReport(data,file)
+}
 
 
 module.exports = {

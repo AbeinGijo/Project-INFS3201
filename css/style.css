@@ -697,6 +697,7 @@ html:not([dir=rtl]) .list-inline-item:not(:last-child) {
     max-width: 1320px;
   }
 }
+
 .row {
   --cui-gutter-x: 1.5rem;
   --cui-gutter-y: 0;
