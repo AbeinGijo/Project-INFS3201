@@ -107,6 +107,9 @@ app.post('/member',upload.single('image'),async(req,res) =>{
 
 })    
 
+
+
+
 // Get request for the reset password page
 app.get('/reset',(req,res)=>{
     // Render the reset password page with no layout and an optional message
