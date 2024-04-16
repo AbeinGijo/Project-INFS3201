@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urgent Cat Feeding Stations Dashboard</title>
+</head>
+<body>
+  <h1>Urgent Items Dashboard</h1>
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr  class="table-primary">
+        <th>Location</th>
+        <th>Category</th>
+        <th>Description</th>
+      
+      </tr>
+    </thead>
+    <tbody class="table-success">
+      {{#each urgentItems}}
+      <tr> 
+         <td>{{this.location}}</td>
+        <td>{{this.category}}</td>
+        <td>{{this.description}}</td>
+       
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</body>
+</html>
