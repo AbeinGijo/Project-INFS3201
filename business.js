@@ -19,7 +19,7 @@ async function attemptLogin(username,password){
         key: sessionKey,
         expiry: new Date(Date.now() + 1000*60*15),
         data: {
-            username: details.user,
+            username: details.username,
             type:details.AccountType
         }
     }
@@ -85,5 +85,5 @@ module.exports = {
     getSession,
     terminateSession,
     attemptLogin,getCatSites,
-    getUrgentSites
+    getUrgentSites,uploadReport
 }
