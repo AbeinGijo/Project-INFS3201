@@ -45,7 +45,7 @@ app.post('/login',async(req,res) =>{
         }
         else if(session.data.type==='standard'){
             res.cookie('session', session.key, {expires: session.expiry})
-            res.redirect('/member')
+            res.redirect('/myposts')
         }
     }
     else {
@@ -66,6 +66,25 @@ app.get('/admin',async(req,res) =>{
         return
     }
     res.render('admin',{layout:undefined})
+
+})
+
+app.get('/myposts',async (req,res)=>{
+    let sessionKey = req.cookies.session
+    if (!sessionKey) {
+        res.redirect('/login?session=true')
+        return
+    }
+    let sd = await business.getSession(sessionKey)
+    if (!sd|| sd.data.type!=='standard') {
+        res.redirect("/login?session=true")
+        return
+    }
+    let data = await business.getCatSites()
+    console.log(data)
+    res.render(`memberposts`,{data:data,
+                                pageTitle:"My Posts",
+                                helpers:{toString}})
 
 })
 
@@ -98,14 +117,18 @@ app.post('/member',upload.single('image'),async(req,res) =>{
     
     let data= req.body
     data.username=sd.data.username
-    console.log(data)
-    console.log(req.files)
+
     let file = req.file
     if(await business.uploadReport(data,file)){
         res.render('member',{pageTitle:'Member Page',message:"Report Updated"})
     }
 
 })    
+
+function toString(x){
+    return x.toString ('base64')    
+}  
+
 
 
 
@@ -163,7 +186,7 @@ app.post("/reset", async (req,res)=> {
 
 
 app.get('/dashboard', async (req, res) => {
-    console.log("Ok")
+
     let sessionKey = req.cookies.session;
 
     if (!sessionKey) {
