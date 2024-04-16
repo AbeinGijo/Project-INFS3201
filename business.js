@@ -37,6 +37,9 @@ async function updateNewuser(username,date){
 async function getCatSites(){
     return await persistence.getCatSites()
 }
+async function getUrgentSites(){
+    return await persistence.getUrgentSites() 
+}
 
 async function terminateSession(key) {
     if (!key) {
@@ -81,5 +84,6 @@ module.exports = {
     updatePassword,
     getSession,
     terminateSession,
-    attemptLogin,getCatSites
+    attemptLogin,getCatSites,
+    getUrgentSites
 }

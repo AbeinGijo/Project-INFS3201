@@ -71,6 +71,12 @@ async function getCatSites(){
     let resultData = await result.toArray()
     return resultData
 }
+async function getUrgentSites(){
+    await connectDatabase()
+    let result = await  urgloc.find()
+    let resultData = await result.toArray()
+    return resultData
+}
 
 // Function to update the last login date for a user
 async function updateNewuser(username, date) {
@@ -134,5 +140,6 @@ module.exports = {
     getSession,
     deleteSession,
     getUserDetails,
-    getCatSites
+    getCatSites,
+    getUrgentSites
 }
