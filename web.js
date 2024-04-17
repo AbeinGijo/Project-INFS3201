@@ -156,11 +156,10 @@ app.post('/register', async (req, res) =>{
     }
   
     // Check if the password and confirmation password match
-    if (pass == confirmpass){
-        // Hash the password
-        let hashedPass = await business.computeHash(pass)
+    if (pass === confirmpass){
+
         // Create a new account object
-        let newaccount = {username: name, email: email, password: hashedPass, AccountType: accType}
+        let newaccount = {username: name, email: email, password: pass, AccountType: accType}
         // Register the new account
         let signin = await business.registerAccount(newaccount)
         // Check if the registration was successful
