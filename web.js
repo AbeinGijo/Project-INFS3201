@@ -45,7 +45,7 @@ app.post('/login',async(req,res) =>{
         }
         else if(session.data.type==='standard'){
             res.cookie('session', session.key, {expires: session.expiry})
-            res.redirect('/member')
+            res.redirect('/myposts')
         }
     }
     else {
@@ -69,6 +69,25 @@ app.get('/admin',async(req,res) =>{
 
 })
 
+app.get('/myposts',async (req,res)=>{
+    let sessionKey = req.cookies.session
+    if (!sessionKey) {
+        res.redirect('/login?session=true')
+        return
+    }
+    let sd = await business.getSession(sessionKey)
+    if (!sd|| sd.data.type!=='standard') {
+        res.redirect("/login?session=true")
+        return
+    }
+    let data = await business.getCatSites()
+    console.log(data)
+    res.render(`memberposts`,{data:data,
+                                pageTitle:"My Posts",
+                                helpers:{toString}})
+
+})
+
 app.get('/member',async(req,res) =>{
     let sessionKey = req.cookies.session
     if (!sessionKey) {
@@ -80,9 +99,7 @@ app.get('/member',async(req,res) =>{
         res.redirect("/login?session=true")
         return
     }
-    if (!fs1.existsSync(`${__dirname}/uploads`)){
-        fs1.mkdirSync(`${__dirname}/uploads`);
-    }
+    
     res.render('member',{pageTitle:'Member Page'})
 
 })
@@ -99,9 +116,72 @@ app.post('/member',upload.single('image'),async(req,res) =>{
     }
     
     let data= req.body
+    data.username=sd.data.username
 
+    let file = req.file
+    if(await business.uploadReport(data,file)){
+        res.render('member',{pageTitle:'Member Page',message:"Report Updated"})
+    }
 
 })    
+
+
+function toString(x){
+    return x.toString ('base64')    
+}  
+
+
+
+app.get("/register",async(req,res)=>{
+    // Render the register page with no layout and an optional message
+    res.render('register',{layout:undefined, message:req.query.message})
+})
+
+
+// Post request for the register page
+app.post('/register', async (req, res) =>{
+    // Get the form data from the request body
+    let name = req.body.username
+    let email = req.body.email
+    let pass = req.body.password
+    let confirmpass = req.body.confirm
+    // let accType = req.body.account_type
+    // console.log(accType)
+    
+    // Check if any of the required fields are empty
+    if (name == "" || email == "" || pass == "" || confirmpass == ""){
+        // Redirect to the register page with an error message
+        res.redirect("/register?message=please dont forget to fill all the fields properly!")
+        return
+    }
+  
+    // Check if the password and confirmation password match
+    if (pass == confirmpass){
+        // Hash the password
+        let hashedPass = await business.computeHash(pass)
+        // Create a new account object
+        let newaccount = {username: name, email: email, password: hashedPass, AccountType: "standard"}
+        // Register the new account
+        let signin = await business.registerAccount(newaccount)
+        // Check if the registration was successful
+        if (!signin){
+            // Redirect to the register page with an error message
+            res.redirect("/register?message=you are not eligible for signin because of having same username or email.")
+            return
+        }
+        else
+        {
+          // Redirect to the login page with a success message
+          res.redirect("/login?message=Welcome user! You have been registered to out community!")
+        }
+    }
+    else
+    {
+        // Redirect to the register page with an error message
+        res.redirect("/register?message=The passwords you entered have not matched!")
+    }
+})
+
 
 // Get request for the reset password page
 app.get('/reset',(req,res)=>{
@@ -130,7 +210,7 @@ app.post("/reset", async (req,res)=> {
                 // Update the user's password
                 await business.updatePassword(email,new_password)
                 // Log a success message
-                console.log(`Your password has been changed from ${req.body.new_password} sucessfully, congratulation! You can continue to navigate now.`)
+                console.log(`Your password has been changed to ${req.body.new_password} sucessfully, congratulation! You can continue to navigate now.`)
                 // Redirect to the home page with a success message
                 res.redirect("/?message=Password Reset is complete!")
             }else{
@@ -156,7 +236,7 @@ app.post("/reset", async (req,res)=> {
 
 
 app.get('/dashboard', async (req, res) => {
-    console.log("Ok")
+
     let sessionKey = req.cookies.session;
 
     if (!sessionKey) {

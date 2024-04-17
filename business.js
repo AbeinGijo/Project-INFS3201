@@ -2,7 +2,7 @@
 const persistence= require('./persistence.js')
 const crypto = require('crypto')
 
-function computeHash(p){
+async function computeHash(p){
     let hash = crypto.createHash('sha512')
     hash.update(p)
     return hash.digest('hex')
@@ -10,6 +10,8 @@ function computeHash(p){
 
 async function attemptLogin(username,password){
     let details = await persistence.getUserDetails(username)
+    // console.log(username)
+    // console.log(password)
     password = computeHash(password)
     if(!details || details.password !=  password){
         return undefined
@@ -19,7 +21,7 @@ async function attemptLogin(username,password){
         key: sessionKey,
         expiry: new Date(Date.now() + 1000*60*15),
         data: {
-            username: details.user,
+            username: details.username,
             type:details.AccountType
         }
     }
@@ -83,7 +85,10 @@ module.exports = {
     findEmail,
     updatePassword,
     getSession,
+    computeHash,
     terminateSession,
     attemptLogin,getCatSites,
-    getUrgentSites
+    getUrgentSites,uploadReport,
+    registerAccount,
+    updateNewuser
 }

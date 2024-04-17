@@ -1,17 +1,21 @@
-<title>{{pageTitle}}</title>
 <style>
-  form{
-    margin: 1% 20%;
-    padding: 1%;
-    background-color: lightgray;
-    border-radius: 2%;
-  }
-  h1{
-    margin-left: 3%;
-  }
-  
+    #body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+
+    padding: 20px; /* Add padding for better visibility */
+}
+
+.card {
+    margin-top: 10%;
+    width: 100%;
+    border: 1px solid white; /* Add border to represent grid lines */
+}
 
 </style>
+
+
 <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
     <div class="sidebar-brand d-none d-md-flex">
       <svg class="sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
@@ -30,13 +34,10 @@
           <svg class="nav-icon">
             <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
           </svg>Report</a></li>
-                
-      
-      
       
     </ul>
     <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
-  </div>
+</div>
   <div class="wrapper d-flex flex-column min-vh-100 bg-light">
     <header class="header header-sticky mb-4">
       <div class="container-fluid">
@@ -125,61 +126,29 @@
             <li class="breadcrumb-item">
               <!-- if breadcrumb is single--><span>Home</span>
             </li>
-            <li class="breadcrumb-item active"><span>Report</span></li>
-            
+            <li class="breadcrumb-item active"><span>Posts</span></li>
           </ol>
         </nav>
       </div>
     </header>
-    <div class="body flex-grow-1 px-3">
-<h1>Member Page</h1>
-{{#if message}}
-  <div class="alert alert-primary" role="alert">
-    <strong>{{message}}</strong>
-  </div>
-  
-{{/if}}
-<form method="post" action="/member" enctype="multipart/form-data">
-  <div class="mb-3">
-    <label for="feedingLocId" class="form-label">Feeding Location</label>
-    <input type="text" class="form-control" id="feedingLocId" name="locName"><br>
+    <div class="body flex-grow-1 px-3" id="body">
+        {{#each data}}
+        <div class="card" style="width: 18rem;">
+            {{#if image}}
+                <img src="data:{{contentType}};base64,{{toString image}}">
+            {{/if}}
 
-    <label for="food" class="form-label">Amount of food Placed:</label>
-    <input type="number" class="form-control" id="food" name="foodAmount"><br>
 
-    <label for="numCats" class="form-label">Number of Cats:</label>
-    <input type="number" class="form-control" id="numCats" name="numCats"><br>
+            <div class="card-body">
+            <h5 class="card-title">{{location}}</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 
-    <label for="water" class="form-label">Amount of water Placed:</label>
-    <input type="number" class="form-control" id="water" name="waterAmount"><br>
-
-    <label for="issues" class="form-label">Issues(if any):</label>
-    <div class="input-group mb-3">
-      <label class="input-group-text" for="category">Category</label>
-      <select class="form-select" id="category" name="category">
-
-        <option value="medical">Medical</option>
-        <option value="Feeding Station Problem">Feeding Station Problem</option>
-        <option value="Food">Food</option>
-        <option value="Water">Water</option>
-      </select>
-  </div>
-    <textarea type="text" class="form-control" id="issues" name="issues"></textarea><br>
+            </div>
+        </div>
+        {{/each}}
     
-    <div class="mb-3">
-    <label class="form-label">Upload Photo(Optional)</label>
-    <input class="form-control" type="file"  name="image">
+        
     </div>
-
-    <div class="col-auto">
-      <input type="submit" class="btn btn-primary mb-3"></input>
+    <div class="container-lg">
     </div>
-
-  </div>
- 
-</form>
- </div>
-<div class="container-lg">
-      </div>
-    </div>
-  </div>
+</div>
