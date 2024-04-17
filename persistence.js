@@ -4,7 +4,6 @@ const crypto = require('crypto')
 
 
 const fs = require('fs').promises;
-const fs1= require('fs')
 
 let client= undefined
 let db = undefined 
@@ -122,10 +121,9 @@ async function uploadReport(data,file){
         let binaryData = await fs.readFile(file.path)
         data.image=binaryData
     }
-    console.log(data)
+
     let result = await catloc.insertOne(data);
-    let urgent = await insertUrgent(data.locName,data.category,data.issues)
-    console.log("Image Uploaded",result)
+    let urgent = await insertUrgent(data.location,data.category,data.issues)
     let files = await fs.readdir(`${__dirname}/uploads`)
     for(f of files){
         await fs.unlink(`${__dirname}/uploads/${f}`)

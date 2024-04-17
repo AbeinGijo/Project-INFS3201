@@ -13,7 +13,6 @@ async function attemptLogin(username,password){
     // console.log(username)
     // console.log(password)
     password = computeHash(password)
-    console.log(password)
     if(!details || details.password !=  password){
         return undefined
     }
@@ -79,6 +78,17 @@ async function updatePassword(email,password){
 }
 
 async function uploadReport(data,file){
+    data.lastVisitDate= new Date(data.lastVisitDate)
+    data.foodLevel=Number(data.foodLevel)
+    data.waterLevel=Number(data.waterLevel)
+    data.size=Number(data.size)
+    if(data.size===''|| data.size<=0){
+        data.status="Inactive"
+    }
+    else{
+        data.status="Active"
+    }
+    console.log(data)
     return await persistence.uploadReport(data,file)
 }
 

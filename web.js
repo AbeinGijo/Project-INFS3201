@@ -81,7 +81,6 @@ app.get('/myposts',async (req,res)=>{
         return
     }
     let data = await business.getCatSites()
-    console.log(data)
     res.render(`memberposts`,{data:data,
                                 pageTitle:"My Posts",
                                 helpers:{toString}})
@@ -118,7 +117,6 @@ app.post('/member',upload.single('image'),async(req,res) =>{
     let data= req.body
     data.username=sd.data.username
     console.log(data)
-
     let file = req.file
     if(await business.uploadReport(data,file)){
         res.render('member',{pageTitle:'Member Page',message:"Report Updated"})
