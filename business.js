@@ -2,7 +2,7 @@
 const persistence= require('./persistence.js')
 const crypto = require('crypto')
 
-async function computeHash(p){
+function computeHash(p){
     let hash = crypto.createHash('sha512')
     hash.update(p)
     return hash.digest('hex')
@@ -13,6 +13,7 @@ async function attemptLogin(username,password){
     // console.log(username)
     // console.log(password)
     password = computeHash(password)
+    console.log(password)
     if(!details || details.password !=  password){
         return undefined
     }
