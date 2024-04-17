@@ -146,8 +146,8 @@ app.post('/register', async (req, res) =>{
     let email = req.body.email
     let pass = req.body.password
     let confirmpass = req.body.confirm
-    let accType = req.body.account_type
-    console.log(accType)
+    // let accType = req.body.account_type
+    // console.log(accType)
     
     // Check if any of the required fields are empty
     if (name == "" || email == "" || pass == "" || confirmpass == ""){
@@ -160,7 +160,9 @@ app.post('/register', async (req, res) =>{
     if (pass === confirmpass){
 
         // Create a new account object
+
         let newaccount = {username: name, email: email, password: pass, AccountType: accType}
+
         // Register the new account
         let signin = await business.registerAccount(newaccount)
         // Check if the registration was successful
@@ -210,7 +212,7 @@ app.post("/reset", async (req,res)=> {
                 // Update the user's password
                 await business.updatePassword(email,new_password)
                 // Log a success message
-                console.log(`Your password has been changed from ${req.body.new_password} sucessfully, congratulation! You can continue to navigate now.`)
+                console.log(`Your password has been changed to ${req.body.new_password} sucessfully, congratulation! You can continue to navigate now.`)
                 // Redirect to the home page with a success message
                 res.redirect("/?message=Password Reset is complete!")
             }else{
@@ -276,7 +278,6 @@ app.get('/urgent', async (req, res) => {
     let urgentItems = await business.getUrgentSites();
     res.render('urgent', { urgentItems });
   });
-  
 
 
 app.use(function(req,res){
