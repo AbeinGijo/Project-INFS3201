@@ -142,16 +142,20 @@
 <form method="post" action="/member" enctype="multipart/form-data">
   <div class="mb-3">
     <label for="feedingLocId" class="form-label">Feeding Location</label>
-    <input type="text" class="form-control" id="feedingLocId" name="locName"><br>
+    <input type="text" class="form-control" id="feedingLocId" name="location"><br>
 
-    <label for="food" class="form-label">Amount of food Placed:</label>
-    <input type="number" class="form-control" id="food" name="foodAmount"><br>
+    <label for="date" class="form-label">Last Visit Date:</label>
+    <input type="date" class="form-control" id="date" name="lastVisitDate"><br>
 
     <label for="numCats" class="form-label">Number of Cats:</label>
-    <input type="number" class="form-control" id="numCats" name="numCats"><br>
+    <input type="number" class="form-control" id="numCats" name="size"><br>
+
+    <label for="food" class="form-label">Amount of food Placed:</label>
+    <input type="number" class="form-control" id="food" name="foodLevel"><br>
+
 
     <label for="water" class="form-label">Amount of water Placed:</label>
-    <input type="number" class="form-control" id="water" name="waterAmount"><br>
+    <input type="number" class="form-control" id="water" name="waterLevel"><br>
 
     <label for="issues" class="form-label">Issues(if any):</label>
     <div class="input-group mb-3">

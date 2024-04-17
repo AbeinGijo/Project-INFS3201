@@ -117,6 +117,7 @@ app.post('/member',upload.single('image'),async(req,res) =>{
     
     let data= req.body
     data.username=sd.data.username
+    console.log(data)
 
     let file = req.file
     if(await business.uploadReport(data,file)){

@@ -28,9 +28,7 @@ async function attemptLogin(username,password){
 }
 
 async function registerAccount(account) {
-    console.log(account)
     account.password=computeHash(account.password)
-    console.log(account)
     return await persistence.registerAccount(account);
   }
 async function updateNewuser(username,date){
