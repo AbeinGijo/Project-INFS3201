@@ -165,7 +165,7 @@ app.post('/register', async (req, res) =>{
         // Check if the registration was successful
         if (!signin){
             // Redirect to the register page with an error message
-            res.redirect("/register?message=you are not eligible for signin because of having same username or email.")
+            res.redirect("/register?message=You are not eligible for signin because of having same username or email.")
             return
         }
         else
