@@ -151,6 +151,8 @@ module.exports = {
     getSession,
     deleteSession,
     getUserDetails,
+    registerAccount,
+    updateNewuser,
     getCatSites,
     getUrgentSites,uploadReport
 }
