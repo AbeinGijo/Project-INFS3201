@@ -196,7 +196,6 @@ app.get('/urgent', async (req, res) => {
     let urgentItems = await business.getUrgentSites();
     res.render('urgent', { urgentItems });
   });
-  
 
 
 app.use(function(req,res){
