@@ -8,6 +8,7 @@ const   t = require('prompt-sync')()
 const multer  = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
+
 let app = express()
 
 app.set('views', __dirname+"/templates")
@@ -265,7 +266,31 @@ app.get('/urgent', async (req, res) => {
     let urgentItems = await business.getUrgentSites();
     res.render('urgent', { urgentItems });
   });
-
+  app.get('/charts', async (req, res) => {
+    let sessionKey = req.cookies.session;
+  
+    if (!sessionKey) {
+      res.redirect('/login?session=true');
+      return;
+    }
+    
+    let sessionData = await business.getSession(sessionKey);
+    if (!sessionData || sessionData.data.type !== 'admin') {
+      res.redirect('/login?session=true');
+      return;
+    }
+    
+    let catLocations = await business.getCatSites(); // Assuming getCatSites retrieves cat locations
+    
+    let foodLevelData = JSON.stringify(catLocations.map(location => ({ location: location.name, foodLevel: location.foodLevel })));
+    let waterLevelData = JSON.stringify(catLocations.map(location => ({ location: location.name, waterLevel: location.waterLevel })));
+  
+    res.render('charts', { foodLevelData: foodLevelData, waterLevelData: waterLevelData });
+    console.log(foodLevelData)
+    console.log(waterLevelData)
+  });
+  
+  
 
 app.use(function(req,res){
     res.status(404).render('404',{layout:undefined});
