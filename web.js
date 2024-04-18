@@ -21,9 +21,11 @@ app.use('/vendors', express.static(__dirname + "/vendors"))
 
 app.get('/',async (req,res) =>{
     let posts = await business.getAllPosts()
+
     res.render('home',{
-        posts:posts
-    })
+        posts:posts,
+            helpers:{toString}})
+
 })
 
 

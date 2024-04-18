@@ -186,7 +186,14 @@ async function getCatlocations(){
 }
 
 async function getAllPosts(){
-    let data = await getCatSites()
+    await connectDatabase()
+    let result = await posts.find()
+    let resultData = await result.toArray()
+    let z=[]
+    for (c of resultData){
+        z.push({noCats:Number(c.noCats),location:c.location,status:c.status,image:c.image})
+    }
+    return z
 
 }
 
