@@ -98,6 +98,8 @@ async function cancelToken(sessionID){
     await persistence.updateSession(sessionData);
 }
 
+
+
 // password reset
 async function findEmail(email){
 

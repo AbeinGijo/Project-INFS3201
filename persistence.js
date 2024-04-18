@@ -67,6 +67,12 @@ async function updateSession(session){
     await session.replaceOne({ key: { $regex: session.key } }, session)
 }
 
+async function validateSession(key) {
+    await connectDatabase();
+    let result = await session.findOne({ sessionKey: key });
+    return result;
+  }
+
 async function getUserDetails(username) {
     await connectDatabase()
     let result = await users.find({ username: username })
@@ -218,6 +224,7 @@ module.exports = {
     getUrgentSites,uploadReport,
     registerAccount,
     getMyPosts,
+    validateSession,
     getCatlocations,
     getAllPosts
 }
