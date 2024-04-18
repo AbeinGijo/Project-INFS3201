@@ -20,8 +20,8 @@ app.use('/assets', express.static(__dirname + "/assets"))
 app.use('/vendors', express.static(__dirname + "/vendors"))
 
 app.get('/',async (req,res) =>{
-    let catloc = await business.getCatSites()
-    res.render('catloc',{ catLocs: catloc})
+   
+    res.render('home')
 })
 
 
@@ -52,20 +52,26 @@ app.post('/login',async(req,res) =>{
     }
 })
 
-app.get('/admin',async(req,res) =>{
-    let sessionKey = req.cookies.session
+app.get('/dashboard', async (req, res) => {
+
+    let sessionKey = req.cookies.session;
+
     if (!sessionKey) {
-        res.redirect('/login?session=true')
-        return
+      res.redirect('/login?session=true');
+      return;
     }
-    let sd = await business.getSession(sessionKey)
-
-    if (!sd || sd.data.type !=='admin') {
-        res.redirect("/login?session=true")
-        return
+  
+    let sessionData = await business.getSession(sessionKey);
+    if (!sessionData || sessionData.data.type !== 'admin') {
+      res.redirect('/login?session=true');
+      return;
     }
-    res.render('admin',{layout:undefined})
+  
+ 
+    let feedingStations = await business.getCatSites();
+    res.render('dashboard', {  feedingStations }); 
 
+ 
 })
 
 app.get('/myposts',async (req,res)=>{
@@ -102,6 +108,7 @@ app.get('/member',async(req,res) =>{
     res.render('member',{pageTitle:'Member Page',catloc:catloc})
 
 })
+
 app.post('/member',upload.single('image'),async(req,res) =>{
     let sessionKey = req.cookies.session
     if (!sessionKey) {
@@ -235,7 +242,7 @@ app.post("/reset", async (req,res)=> {
 
 
 
-app.get('/dashboard', async (req, res) => {
+app.get('/admin', async (req, res) => {
 
     let sessionKey = req.cookies.session;
 
