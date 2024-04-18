@@ -311,11 +311,12 @@ app.get('/urgent', async (req, res) => {
     let foodData = []
     let location=await business.getCatlocations()
     let waterData=[]
-    let catData=[]
+    let catData = catLocations.map(location => location.noCats); 
     for(c of catLocations){
         foodData.push(c.foodLevel)
         waterData.push(c.waterLevel)
         catData.push(c.noCats)
+      
 
     }
 
@@ -323,10 +324,7 @@ app.get('/urgent', async (req, res) => {
                         foodData:foodData,
                         waterData:waterData,
                         location:location,
-
-                        catData:catData,
-
-                    });
+                        catData:catData});
 
   });
   
