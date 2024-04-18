@@ -10,6 +10,8 @@ let db = undefined
 let users=undefined
 let session = undefined
 let catloc = undefined
+let posts = undefined
+let urgloc=undefined
 
 async function connectDatabase(){
     if (!client){
@@ -20,6 +22,7 @@ async function connectDatabase(){
         session = db.collection("sessionData")
         catloc = db.collection("catlocation")
         urgloc=db.collection("urgent")
+        posts= db.collection("posts")
         return db
     }
 }
@@ -73,8 +76,8 @@ async function getCatSites(){
 
 async function getMyPosts(sd){
     await connectDatabase()
-    console.log(sd)
-    let result = await catloc.find({username: sd.data.username})
+
+    let result = await posts.find({username: sd.data.username})
     let resultData = await result.toArray()
     return resultData
 }
@@ -126,12 +129,13 @@ async function updatePassword(email,password){
 
 async function uploadReport(data,file){
     await connectDatabase()
+    await updateFeedingSites(data.location,data.noCats,data.lastVisitDate,data.foodLevel,data.waterLevel)
     if(file){
         let binaryData = await fs.readFile(file.path)
         data.image=binaryData
     }
 
-    let result = await catloc.insertOne(data);
+    let result = await posts.insertOne(data);
     if(data.issues !==""){
         let urgent = await insertUrgent(data.location,data.category,data.issues)
     }
@@ -139,8 +143,25 @@ async function uploadReport(data,file){
     for(f of files){
         await fs.unlink(`${__dirname}/uploads/${f}`)
     }
-
     return result
+}
+
+async function updateFeedingSites(loc, cat,date, food,water){
+    await connectDatabase()
+    let data = await catloc.findOne({location:loc})
+    console.log(data)
+    data.noCats=cat
+    data.lastVisitDate=date
+    data.foodLevel+=food
+    data.waterLevel+=water
+    if(cat<=0){
+        data.status="Inactive"
+    }
+    else{
+        data.status="Active"
+    }
+    console.log(data)
+    await catloc.replaceOne({location:loc},data)
 }
 
 async function insertUrgent(loc,cat,issue){
@@ -164,6 +185,11 @@ async function getCatlocations(){
     return locs
 }
 
+async function getAllPosts(){
+    let data = await getCatSites()
+
+}
+
 module.exports = {
     startSession,
     findEmail,
@@ -177,5 +203,6 @@ module.exports = {
     getUrgentSites,uploadReport,
     registerAccount,
     getMyPosts,
-    getCatlocations
+    getCatlocations,
+    getAllPosts
 }
