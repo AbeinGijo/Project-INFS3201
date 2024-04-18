@@ -21,8 +21,7 @@ app.use('/vendors', express.static(__dirname + "/vendors"))
 
 app.get('/',async (req,res) =>{
     let catloc = await business.getCatSites()
-    res.render('catloc',{layout:undefined,
-                            catLocs: catloc})
+    res.render('catloc',{ catLocs: catloc})
 })
 
 
@@ -80,7 +79,7 @@ app.get('/myposts',async (req,res)=>{
         res.redirect("/login?session=true")
         return
     }
-    let data = await business.getCatSites()
+    let data = await business.getMyPosts(sd)
     res.render(`memberposts`,{data:data,
                                 pageTitle:"My Posts",
                                 helpers:{toString}})

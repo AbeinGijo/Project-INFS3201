@@ -40,6 +40,12 @@ async function updateNewuser(username,date){
 async function getCatSites(){
     return await persistence.getCatSites()
 }
+
+async function getMyPosts(sd){
+    return await persistence.getMyPosts(sd)
+}
+
+
 async function getUrgentSites(){
     return await persistence.getUrgentSites() 
 }
@@ -102,6 +108,7 @@ module.exports = {
     attemptLogin,getCatSites,
     getUrgentSites,uploadReport,
     registerAccount,
-    updateNewuser
+    updateNewuser,
+    getMyPosts
 
 }
