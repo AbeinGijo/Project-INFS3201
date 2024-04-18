@@ -150,7 +150,7 @@ async function uploadReport(data,file){
     }
 
     let result = await posts.insertOne(data);
-    if(data.issues !==""){
+    if(data.issues !=="" && data.category !== ""){
         let urgent = await insertUrgent(data.location,data.category,data.issues)
     }
     let files = await fs.readdir(`${__dirname}/uploads`)
