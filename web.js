@@ -1,10 +1,21 @@
+/*
+# Account Details
+## Admin
+- username: syambashar
+- password syam1234
+
+## Member
+- username: faizjabir
+- password faiz1234
+*/
+
+
+
 const express=require('express')
 const business = require('./business.js')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const handlebars = require('express-handlebars')
-const fs1= require('fs')
-const   t = require('prompt-sync')()
 const multer  = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
