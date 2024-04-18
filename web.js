@@ -147,13 +147,13 @@ app.post('/member',upload.single('image'),async(req,res) =>{
     if (!sd.csrfToken) {
         res.status(419)
         res.redirect('/member?message=CSRF token Problem')
-        
+        return
     }
 
     if (sd.csrfToken != token) {
         res.status(419)
         res.redirect('/member?message=CSRF token Mismatch')
-        
+        return
     }
     
     delete data.csrfToken

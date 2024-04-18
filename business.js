@@ -80,7 +80,7 @@ async function generateToken(sd){
 
     // Set the CSRF token for the session
     sd.csrfToken = token;
-    console.log(sd)
+
     await persistence.updateSession(sd);
     return token;
 }
@@ -90,7 +90,7 @@ async function cancelToken(sessionID){
     let sd = await persistence.getSession(sessionID);
     // Delete the CSRF token from the session data
     delete sd.csrfToken;
-    console.log(sd)
+
     await persistence.updateSession(sd);
 }
 
