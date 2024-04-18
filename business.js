@@ -82,12 +82,21 @@ async function generateToken(sessionID){
 
     // Set the CSRF token for the session
     sessionData.csrfToken = token;
-
-    // Update the session with the new token in the database
+  
     await persistence.updateSession(sessionData);
     return token;
 }
 
+// This function is named `cancelToken` and takes one argument `sessionID`
+async function cancelToken(sessionID){
+
+    let sessionData = await persistence.getSession(sessionID);
+
+    // Delete the CSRF token from the session data
+    delete sessionData.csrfToken;
+
+    await persistence.updateSession(sessionData);
+}
 
 // password reset
 async function findEmail(email){
@@ -131,6 +140,7 @@ module.exports = {
     updateNewuser,
     getMyPosts,
     getCatlocations,
+    cancelToken,
     getAllPosts,
     generateToken,
 
