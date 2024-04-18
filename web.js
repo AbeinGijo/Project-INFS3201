@@ -242,12 +242,6 @@ app.post("/reset", async (req,res)=> {
   }
 )
 
-
-
-
-
-
-
 app.get('/urgent', async (req, res) => {
     console.log("Urgent  requested");
     let sessionKey = req.cookies.session;
@@ -266,6 +260,8 @@ app.get('/urgent', async (req, res) => {
     let urgentItems = await business.getUrgentSites();
     res.render('urgent', { urgentItems });
   });
+
+  
   app.get('/charts', async (req, res) => {
     let sessionKey = req.cookies.session;
   
