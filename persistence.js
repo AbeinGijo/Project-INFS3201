@@ -149,7 +149,7 @@ async function uploadReport(data,file){
 async function updateFeedingSites(loc, cat,date, food,water){
     await connectDatabase()
     let data = await catloc.findOne({location:loc})
-    console.log(data)
+
     data.noCats=cat
     data.lastVisitDate=date
     data.foodLevel+=food
@@ -160,7 +160,7 @@ async function updateFeedingSites(loc, cat,date, food,water){
     else{
         data.status="Active"
     }
-    console.log(data)
+
     await catloc.replaceOne({location:loc},data)
 }
 

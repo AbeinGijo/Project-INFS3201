@@ -112,6 +112,7 @@ module.exports = {
     registerAccount,
     updateNewuser,
     getMyPosts,
-    getCatlocations
+    getCatlocations,
+    getAllPosts
 
 }
