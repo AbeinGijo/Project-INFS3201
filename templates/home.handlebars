@@ -4,9 +4,12 @@
 * @link https://coreui.io/product/free-bootstrap-admin-template/
 * Copyright (c) 2023 creativeLabs Łukasz Holeczek
 * Licensed under MIT (https://github.com/coreui/coreui-free-bootstrap-admin-template/blob/main/LICENSE)
--->
+--><!-- Breadcrumb-->
+
 <html lang="en">
   <head>
+   
+    <title>Admin Dashboard</title>
     <base href="./">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +17,6 @@
     <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
     <meta name="author" content="Łukasz Holeczek">
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
-    <title>CoreUI Free Bootstrap Admin Template</title>
     <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-icon-72x72.png">
@@ -34,38 +36,197 @@
     <meta name="theme-color" content="#ffffff">
     <!-- Vendors styles-->
     <link rel="stylesheet" href="vendors/simplebar/css/simplebar.css">
-    <link rel="stylesheet" href="css/vendors/simplebar.css">
+    <link rel="stylesheet" href="vendors/simplebar.css">
     <!-- Main styles for this application-->
     <link href="css/style.css" rel="stylesheet">
     <!-- We use those styles to show code examples, you should remove them in your application.-->
     <link href="css/examples.css" rel="stylesheet">
+    <link href="vendors/@coreui/chartjs/css/coreui-chartjs.css" rel="stylesheet">
   </head>
   <body>
-    <div class="bg-light min-vh-100 d-flex flex-row align-items-center">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-6">
-            <div class="clearfix">
-              <h1 class="float-start display-3 me-4">404</h1>
-              <h4 class="pt-3">Oops! You're lost.</h4>
-              <p class="text-medium-emphasis">The page you are looking for was not found.</p>
+       
+       
+        
+  
+<style>h2,h3{
+    text-decoration: underline;
+}
+
+</style>
+    <div class="container-fluid">
+        <header class="header">
+           <svg class="sidebar-brand-full" width="118" height="46" alt="Stray Cat Feeding System">
+          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-cat"><h1>STRAY CAT FEEDING     SYSTEM</h1></use>
+          
+        </svg>
+            <div class="header-nav">
+                 <svg  width="20" height="40" alt="Home">
+          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-home"><p><a class="nav-item nav-link active" href="#">Home</a></p></use>
+          
+        </svg>
+                
+              
+                        <svg  width="20" height="40" alt="Home">
+          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user"><p>  <a class="nav-item nav-link" href="/login">Login</a></p></use>
+          
+        </svg>
             </div>
-            <div class="input-group"><span class="input-group-text">
-                <svg class="icon">
-                  <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-magnifying-glass"></use>
-                </svg></span>
-              <input class="form-control" id="prependedInput" size="16" type="text" placeholder="What are you looking for?">
-              <button class="btn btn-info" type="button">Search</button>
+        </header>
+
+        <div class="container-fluid">
+            <p></p>
+            <div class="p-5 text-center text-bg-primary border border-dark rounded -3">
+                <div class="container py-5">
+                    <h1 class="text-body-emphasis">We are pleased to have you with us</h1>
+                    <p class="col-lg-8 mx-auto lead">
+                       <h2>About Us</h2>
+                       <BR>
+  <p>The Stray Cat Feeding System website is a collaborative effort between <strong>OUR TEAM</strong> and the <strong>COMMUNITY</strong> in Qatar. We are passionate about animal welfare and committed to improving the lives of stray cats in our community.</p>
+
+                    </p>
+                </div>
+                
             </div>
-          </div>
+            <br>
+            <div class="p-5 text-center text-bg-primary border border-dark rounded -3">
+                <div class="container py-5">
+                   
+                    <p class="col-lg-8 mx-auto lead">
+  <h3>Our Mission</h3>
+  <br>
+  <ul>
+    <li>Connecting cat lovers with feeding locations: We provide a platform for volunteers to locate feeding stations and contribute to the well-being of stray cats.</li>
+    <li>Promoting transparency and accountability: We offer a way for volunteers to report on their visits to feeding stations, including details about food and water levels and any observed health concerns.</li>
+    <li>Supporting the work of the local animal shelter: The information gathered through this system will assist the shelter in efficiently managing resources and allocating support to areas with the greatest need.</li>
+  </ul>
+
+                    </p>
+                </div>
+                      
         </div>
-      </div>
+        <br>
+          <div class="p-5 text-center text-bg-primary border border-dark rounded -3">
+                <div class="container py-5">
+                   
+                    <p class="col-lg-8 mx-auto lead">
+                        
+  <h3>Our Approach</h3>
+  <br>
+  <p>This website utilizes technology to empower volunteers and streamline the process of caring for stray cats. By providing a user-friendly platform for information sharing and collaboration, we aim to:</p>
+  <ul>
+    <li>Reduce food waste and ensure consistent feeding: Volunteers can track food levels and coordinate efforts to ensure cats have access to a reliable source of nourishment.</li>
+    <li>Identify and address health concerns: Early detection of potential health issues in stray cats allows for timely intervention and treatment by the shelter.</li>
+    <li>Promote responsible cat care: The website offers educational resources to raise awareness about responsible cat ownership and the importance of spaying and neutering.</li>
+  </ul>
+
+
+  </p>
+                </div>
+                
+            </div>
+            <br>
+                 <div class="p-5 text-center text-bg-primary border border-dark rounded -3">
+                <div class="container py-5">
+                   
+                    <p class="col-lg-8 mx-auto lead">
+                        
+
+<h3>Join Us in Making a Difference</h3>
+<br>
+  <p>We invite you to join us in our mission to help stray cats in Qatar. Whether you're a dedicated volunteer or simply someone who cares about animal welfare, this website provides a way for you to get involved.</p>
+  <p>Here's how you can contribute:</p>
+  <ul>
+    <li>Sign up as a volunteer: Registered users can view feeding station locations, record details about their visits, and report any concerns.</li>
+    <li>Spread the word: Tell your friends, family, and neighbors about the Stray Cat Feeding System website and encourage them to get involved.</li>
+  </ul>
+  <p>By working together, we can create a more compassionate and caring environment for all cats in Qatar.</p>
+
+
+  </p>
+                </div>
+                
+            </div>
     </div>
-    <!-- CoreUI and necessary plugins-->
+
+<br>
+<br>
+
+
+   
+        <div class="container-lg">
+          <div class="row">
+           
+            <!-- /.col-->
+            <div class="col-sm-6 col-lg-4">
+              <div class="card text-white bg-info">
+                <div class="card-body ">
+                    <h5>Contact US</h5>
+                 <p><br>We appreciate your interest in the Stray Cat Feeding System! If you have any questions, comments, or suggestions, please don't hesitate to reach out to us.</p>
+                </div>
+                <div class="c-chart-wrapper mt-3 mx-3" style="height:15px;">
+                
+                </div>
+              </div>
+            </div>
+            <!-- /.col-->
+            <div class="col-sm-6 col-lg-3">
+              <div class="card mb-4 text-white bg-danger">
+                <div class="card-body ">
+                <h5>Location</h5>
+        <p><br>Ain Khalid, Aba Al Mashmoom Street, Zone 56, Doha Qatar</p>
+
+                </div>
+                <div class="c-chart-wrapper mt-3 mx-3" style="height:39px;  ">
+                
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+              <div class="card text-white bg-warning">
+                <div class="card-body   ">
+              <h5>Phone </h5>
+        <p><br>+974 44383838</p>
+        <p>+974 55257165</p>
+
+
+                </div>
+                <div class="c-chart-wrapper mt-3 mx-3" style="height:23px;">
+                
+                </div>
+              </div>
+            </div>
+           
+            </div>
+            <!-- /.col-->
+          </div>
+          <!-- /.row-->
+          
+ 
+  
+
+</div>
+    
+
+</html>
+
+<div class="container-lg">
+    
+          </div>
+             <footer class="footer">
+        <p id="foot">Copyright &copy; 2024 Stray Cat Feeding System. All rights reserved.</p>
+       
+      </footer>
+<!-- CoreUI and necessary plugins-->
     <script src="vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
     <script src="vendors/simplebar/js/simplebar.min.js"></script>
+    <!-- Plugins and scripts required by this view-->
+    <script src="vendors/chart.js/js/chart.min.js"></script>
+    <script src="vendors/@coreui/chartjs/js/coreui-chartjs.js"></script>
+    <script src="vendors/@coreui/utils/js/coreui-utils.js"></script>
+    <script src="js/main.js"></script>
     <script>
     </script>
 
   </body>
 </html>
+
