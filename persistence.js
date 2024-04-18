@@ -60,6 +60,13 @@ async function deleteSession(key){
     await session.deleteOne({sessionNumber:key})
 }
 
+
+async function updateSession(session){
+    await connectDatabase()
+    // Replace the existing session document in the database with the new session document
+    await session.replaceOne({ key: { $regex: session.key } }, session)
+}
+
 async function getUserDetails(username) {
     await connectDatabase()
     let result = await users.find({ username: username })
@@ -205,6 +212,7 @@ module.exports = {
     deleteSession,
     getUserDetails,
     registerAccount,
+    updateSession,
     updateNewuser,
     getCatSites,
     getUrgentSites,uploadReport,

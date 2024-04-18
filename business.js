@@ -29,6 +29,7 @@ async function attemptLogin(username,password){
     return sd
 }
 
+
 async function registerAccount(account) {
     account.password=computeHash(account.password)
     return await persistence.registerAccount(account);
@@ -70,6 +71,7 @@ async function getSession(key) {
 async function terminateSession(key){
     return await persistence.deleteSession(key)
 }
+
 
 // password reset
 async function findEmail(email){
