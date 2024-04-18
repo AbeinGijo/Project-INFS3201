@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const handlebars = require('express-handlebars')
 const fs1= require('fs')
+const   t = require('prompt-sync')()
 const multer  = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
@@ -18,6 +19,9 @@ app.use(cookieParser())
 app.use('/css', express.static(__dirname + "/css"))
 app.use('/assets', express.static(__dirname + "/assets"))
 app.use('/vendors', express.static(__dirname + "/vendors"))
+
+
+
 
 app.get('/',async (req,res) =>{
     let posts = await business.getAllPosts()
@@ -37,36 +41,21 @@ app.get('/login',(req,res) =>{
                         session:session})
 })
 
-// Express route handler for the '/login' POST request
 app.post('/login',async(req,res) =>{
-    // Extract the 'username' and 'password' from the request body
     let username= req.body.username
     let password = req.body.password
-
-    // Attempt to log in with the provided 'username' and 'password'
     let session = await business.attemptLogin(username,password)
-
-    // If the login is successful
     if (session) {
-        // Check the type of the session
         if(session.data.type==='admin'){
-            // Set a cookie with the session key and expires time
             res.cookie('session', session.key, {expires: session.expiry})
-
-            // Redirect the user to the '/dashboard' page
             res.redirect('/dashboard')
         }
         else if(session.data.type==='standard'){
-            // Set a cookie with the session key and expires time
             res.cookie('session', session.key, {expires: session.expiry})
-
-            // Redirect the user to the '/myposts' page
             res.redirect('/myposts')
         }
     }
-    // If the login is unsuccessful
     else {
-        // Redirect the user to the '/login' page with a message 'Invalid Credentials'
         res.redirect('/login?message=Invalid Credentials')
     }
 })
@@ -256,18 +245,11 @@ app.post("/reset", async (req,res)=> {
   }
 )
 
-async function isAuthenticated(key) {
-    if (!key) {
-        return false
-    }
 
-    let sd = await business.getSession(key)
-    if (!sd) {
-        return false
-    }
 
-    return sd
-}
+
+
+
 
 app.get('/urgent', async (req, res) => {
     console.log("Urgent  requested");
@@ -289,6 +271,9 @@ app.get('/urgent', async (req, res) => {
   });
 
 
+  function jsonify(x){
+    return JSON.stringify(x)
+}
   app.get('/charts', async (req, res) => {
     let sessionKey = req.cookies.session;
   
@@ -304,13 +289,22 @@ app.get('/urgent', async (req, res) => {
     }
     
     let catLocations = await business.getCatSites(); // Assuming getCatSites retrieves cat locations
-    
-    let foodLevelData = JSON.stringify(catLocations.map(location => ({ location: location.name, foodLevel: location.foodLevel })));
-    let waterLevelData = JSON.stringify(catLocations.map(location => ({ location: location.name, waterLevel: location.waterLevel })));
-  
-    res.render('charts', { foodLevelData: foodLevelData, waterLevelData: waterLevelData });
-    console.log(foodLevelData)
-    console.log(waterLevelData)
+
+    let foodData = []
+    let location=await business.getCatlocations()
+    let waterData=[]
+    for(c of catLocations){
+        foodData.push(c.foodLevel)
+        waterData.push(c.waterLevel)
+    }
+
+    res.render('charts',{layout:undefined,
+                        foodData:foodData,
+                        waterData:waterData,
+                        location:location,
+                        helpers:{jsonify}
+                    });
+
   });
   
   

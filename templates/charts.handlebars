@@ -1,71 +1,238 @@
-<h2>Food Level Chart</h2>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sample Chart</title>
-  <script src="vendors/chart.js/js/chart.min.js"></script>
-</head>
-<canvas id="foodLevelChart"></canvas>
+<!DOCTYPE html><!--
+* CoreUI - Free Bootstrap Admin Template
+* @version v4.2.2
+* @link https://coreui.io/product/free-bootstrap-admin-template/
+* Copyright (c) 2023 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://github.com/coreui/coreui-free-bootstrap-admin-template/blob/main/LICENSE)
+--><!-- Breadcrumb-->
+<html lang="en">
+  <head>
+    <title>Admin Dashboard</title>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendors styles-->
+    <link rel="stylesheet" href="vendors/simplebar/css/simplebar.css">
+    <link rel="stylesheet" href="vendors/simplebar.css">
+    <!-- Main styles for this application-->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- We use those styles to show code examples, you should remove them in your application.-->
+    <link href="css/examples.css" rel="stylesheet">
+  </head>
+  
+  <body>
+   <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
+      <div class="sidebar-brand d-none d-md-flex">
+        <svg class="sidebar-brand-full" width="118" height="46" alt="Stray Cat Feeding System">
+          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-cat"><p>STRAY CAT FEEDING     SYSTEM</p></use>
+          
+        </svg>
+        
+      </div>
+      <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
 
+
+        <li class="nav-item"><a class="nav-link" href="/dashboard">
+          <svg class="nav-icon">
+            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
+          </svg> Dashboard</a></li>
+    <li class="nav-item"><a class="nav-link" href="/urgent">
+          <svg class="nav-icon">
+            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-healing"></use>
+          </svg> Urgent</a></li>
+           <li class="nav-item"><a class="nav-link" href="/charts">
+          <svg class="nav-icon">
+            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-graph"></use>
+          </svg> Chart</a></li>
+          
+      
+          
+      
+    </div>
+    <div class="wrapper d-flex flex-column min-vh-100 bg-light">
+      <header class="header header-sticky mb-4">
+        <div class="container-fluid">
+          <button class="header-toggler px-md-0 me-md-3" type="button" onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()">
+            <svg class="icon icon-lg">
+              <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-menu"></use>
+            </svg>
+          </button><a class="header-brand d-md-none" href="#">
+            <svg width="118" height="46" alt="CoreUI Logo">
+              <use xlink:href="assets/brand/coreui.svg#full"></use>
+            </svg></a>
+          <ul class="header-nav d-none d-md-flex">
+            <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
+          
+          </ul>
+              
+          </ul>
+          <ul class="header-nav ms-auto">
+            <li ></li>
+            <li ></li>
+            <li ></li>
+          </ul>
+      
+          <ul class="header-nav ms-3">
+  <li class="nav-item dropdown ">
+    <div style="display: flex; align-items: center;">
+      <a class="dropdown-item" href="/" >
+        <svg class="icon me-2">
+          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
+        </svg> Logout
+      </a>
+      <div class="avatar avatar-md">
+        <img class="avatar-img" src="assets/img/avatars/8.jpg">
+      </div>
+    </div>
+  </li>
+</ul>
+
+
+        </div>
+        <div class="header-divider"></div>
+        <div class="container-fluid">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb my-0 ms-2">
+              <li class="breadcrumb-item">
+                <!-- if breadcrumb is single--><span>Home</span>
+              </li>
+              <li class="breadcrumb-item active"><span>Dashboard</span></li>
+            </ol>
+          </nav>
+        </div>
+      </header>
+    <div class="body flex-grow-1 px-3">
+      <div class="charts">
+        <canvas id="foodChart" ></canvas>
+        <canvas id="waterChart" ></canvas>
+      </div>
+
+      <div class="container-lg">
+       <footer class="footer">
+        <p id="foot">Copyright &copy; 2024 Stray Cat Feeding System. All rights reserved.</p>
+       
+      </footer>
+          </div>
+<!-- CoreUI and necessary plugins-->
+    <script src="vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
+    <script src="vendors/simplebar/js/simplebar.min.js"></script>
+    <!-- Plugins and scripts required by this view-->
+    <script src="vendors/chart.js/js/chart.min.js"></script>
+    <script src="vendors/@coreui/chartjs/js/coreui-chartjs.js"></script>
+    <script src="vendors/@coreui/utils/js/coreui-utils.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+    </script>
 <script>
-  let foodLevelCtx = document.getElementById('foodLevelChart').getContext('2d');
-  // Parse the JSON string back into a JavaScript object
-  let foodLevelData = JSON.parse('{{foodLevelData}}'); 
+  document.addEventListener("DOMContentLoaded", function() {
+    // Chart.js configuration for food level chart
+    let locations=[{{#each location}}`{{this}}`,{{/each}}]
+    let foodData = [{{#each foodData}}{{this}},{{/each}}]
+    let waterData = [{{#each waterData}}{{this}},{{/each}}]
+    console.log(waterData)
 
-  // Chart.js configuration for food level chart
-  new Chart(foodLevelCtx, {
-    type: 'bar',
-    data: {
-      labels: foodLevelData.map(function(data) { return data.location; }),
-      datasets: [{
-        label: 'Food Level',
-        data: foodLevelData.map(function(data) { return data.foodLevel; }),
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderColor: 'rgba(255, 99, 132, 1)',
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
+    let foodChart = new Chart(document.getElementById('foodChart'), {
+      type: 'bar',
+      data: {
+        labels: locations,
+        datasets: [{
+          label: 'Food Amount',
+          data: foodData,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(201, 203, 207, 0.2)'
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
+            'rgb(153, 102, 255)',
+            'rgb(201, 203, 207)'
+          ],
+          borderWidth: 1
         }]
+      },
+      options: {
+        scales: {
+          y: {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        }
       }
-    }
+    });
+    let waterChart = new Chart(document.getElementById('waterChart'), {
+      type: 'bar',
+      data: {
+        labels: locations,
+        datasets: [{
+          label: 'Water Amount',
+          data: waterData,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(201, 203, 207, 0.2)'
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
+            'rgb(153, 102, 255)',
+            'rgb(201, 203, 207)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        }
+      }
+    });
   });
+
+
+  
 </script>
 
-<h2>Water Level Chart</h2>
-<canvas id="waterLevelChart"></canvas>
 
-<script>
-  let waterLevelCtx = document.getElementById('waterLevelChart').getContext('2d');
-  // Parse the JSON string back into a JavaScript object
-  let waterLevelData = JSON.parse('{{waterLevelData}}'); 
 
-  // Chart.js configuration for water level chart (similar structure as food level)
-  new Chart(waterLevelCtx, {
-    type: 'bar',
-    data: {
-      labels: waterLevelData.map(function(data) { return data.location; }),
-      datasets: [{
-        label: 'Water Level',
-        data: waterLevelData.map(function(data) { return data.waterLevel; }),
-        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-        borderColor: 'rgba(54, 162, 235, 1)',
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
-        }]
-      }
-    }
-  });
-</script>
