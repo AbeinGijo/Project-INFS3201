@@ -29,6 +29,7 @@ async function attemptLogin(username,password){
     return sd
 }
 
+
 async function registerAccount(account) {
     account.password=computeHash(account.password)
     return await persistence.registerAccount(account);
@@ -70,6 +71,23 @@ async function getSession(key) {
 async function terminateSession(key){
     return await persistence.deleteSession(key)
 }
+
+// This function is named `generateToken` and takes one argument `sessionID`
+async function generateToken(sessionID){
+    // Generate a random token 
+    let token = Math.floor(Math.random()*1000000)
+
+    // Get the session data for the given sessionID
+    let sessionData = await persistence.getSession(sessionID);
+
+    // Set the CSRF token for the session
+    sessionData.csrfToken = token;
+
+    // Update the session with the new token in the database
+    await persistence.updateSession(sessionData);
+    return token;
+}
+
 
 // password reset
 async function findEmail(email){
@@ -113,6 +131,7 @@ module.exports = {
     updateNewuser,
     getMyPosts,
     getCatlocations,
-    getAllPosts
+    getAllPosts,
+    generateToken,
 
 }

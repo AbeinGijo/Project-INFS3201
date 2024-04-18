@@ -128,12 +128,12 @@
                 <div class="container py-5" id="body">
                   
                   {{#each posts}}
-                    <div class="card border-primary mb-3 " style="width: 20rem;"><span class="border border-2 border-info" ></span>
+                    <div class="card border-primary mb-3 rounded " style="width: 20rem;"><span class="border border-2 border-info" ></span>
                       {{#if image}}
-                          <img src="data:{{contentType}};base64,{{toString image}}" >
+                          <img src="data:{{contentType}};base64,{{toString image}}" class="rounded">
                           <span class="border-bottom border-bottom-primary"></span>
                       {{else}}
-                          <img src="assets/noImage.jpg" alt="No Image">
+                          <img src="assets/noImage.jpg" alt="No Image" class="rounded">
                       {{/if}}
                       <div class="card-body">
                           <h5 class="card-title">{{location}}</h5>
