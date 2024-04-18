@@ -148,15 +148,15 @@
     {{/if}}
     <form method="post" action="/member" enctype="multipart/form-data">
       <div class="mb-3">
-        <div class="form-floating mb-3">
-          <select class="form-select" aria-label="Disabled select example" id="feedingSite">
+
+          <select class="form-select" id="feedingSite" name="location">
             <option value="">Select Feeding Site</option>
             {{#each catloc}}
             <option value="{{this}}">{{this}}</option>
 
             {{/each}}
           </select>
-        </div>
+
         
         <label for="date" class="form-label">Last Visit Date:</label>
         <input type="date" class="form-control" id="date" name="lastVisitDate"><br>

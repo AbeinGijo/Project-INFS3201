@@ -104,8 +104,8 @@ app.get('/member',async(req,res) =>{
         return
     }
     let catloc=await business.getCatlocations()
-    console.log(catloc)
-    res.render('member',{pageTitle:'Member Page',catloc:catloc})
+    console.log("message",req.query.message)
+    res.render('member',{pageTitle:'Member Page',catloc:catloc,message:req.query.message})
 
 })
 
@@ -122,11 +122,12 @@ app.post('/member',upload.single('image'),async(req,res) =>{
     }
     
     let data= req.body
-    data.username=sd.data.username
     console.log(data)
+    data.username=sd.data.username
+
     let file = req.file
     if(await business.uploadReport(data,file)){
-        res.render('member',{pageTitle:'Member Page',message:"Report Uploaded   "})
+        res.redirect('/member?message=Report Uploaded')
     }
 
 })    
