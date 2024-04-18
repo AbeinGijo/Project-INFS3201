@@ -70,6 +70,15 @@ async function getCatSites(){
     let resultData = await result.toArray()
     return resultData
 }
+
+async function getMyPosts(sd){
+    await connectDatabase()
+    console.log(sd)
+    let result = await catloc.find({username: sd.data.username})
+    let resultData = await result.toArray()
+    return resultData
+}
+
 async function getUrgentSites(){
     await connectDatabase()
     let result = await  urgloc.find()
@@ -123,7 +132,9 @@ async function uploadReport(data,file){
     }
 
     let result = await catloc.insertOne(data);
-    let urgent = await insertUrgent(data.location,data.category,data.issues)
+    if(data.issues !==""){
+        let urgent = await insertUrgent(data.location,data.category,data.issues)
+    }
     let files = await fs.readdir(`${__dirname}/uploads`)
     for(f of files){
         await fs.unlink(`${__dirname}/uploads/${f}`)
@@ -153,5 +164,6 @@ module.exports = {
     updateNewuser,
     getCatSites,
     getUrgentSites,uploadReport,
-    registerAccount
+    registerAccount,
+    getMyPosts
 }
