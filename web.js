@@ -4,7 +4,6 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const handlebars = require('express-handlebars')
 const fs1= require('fs')
-const   t = require('prompt-sync')()
 const multer  = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
@@ -38,21 +37,36 @@ app.get('/login',(req,res) =>{
                         session:session})
 })
 
+// Express route handler for the '/login' POST request
 app.post('/login',async(req,res) =>{
+    // Extract the 'username' and 'password' from the request body
     let username= req.body.username
     let password = req.body.password
+
+    // Attempt to log in with the provided 'username' and 'password'
     let session = await business.attemptLogin(username,password)
+
+    // If the login is successful
     if (session) {
+        // Check the type of the session
         if(session.data.type==='admin'){
+            // Set a cookie with the session key and expires time
             res.cookie('session', session.key, {expires: session.expiry})
+
+            // Redirect the user to the '/dashboard' page
             res.redirect('/dashboard')
         }
         else if(session.data.type==='standard'){
+            // Set a cookie with the session key and expires time
             res.cookie('session', session.key, {expires: session.expiry})
+
+            // Redirect the user to the '/myposts' page
             res.redirect('/myposts')
         }
     }
+    // If the login is unsuccessful
     else {
+        // Redirect the user to the '/login' page with a message 'Invalid Credentials'
         res.redirect('/login?message=Invalid Credentials')
     }
 })
@@ -261,7 +275,7 @@ app.get('/urgent', async (req, res) => {
     res.render('urgent', { urgentItems });
   });
 
-  
+
   app.get('/charts', async (req, res) => {
     let sessionKey = req.cookies.session;
   
