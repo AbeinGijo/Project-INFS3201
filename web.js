@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const handlebars = require('express-handlebars')
 const fs1= require('fs')
-const prompt = require('prompt-sync')()
+const   t = require('prompt-sync')()
 const multer  = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
@@ -118,7 +118,7 @@ app.post('/member',upload.single('image'),async(req,res) =>{
     console.log(data)
     let file = req.file
     if(await business.uploadReport(data,file)){
-        res.render('member',{pageTitle:'Member Page',message:"Report Updated"})
+        res.render('member',{pageTitle:'Member Page',message:"Report Uploaded   "})
     }
 
 })    
