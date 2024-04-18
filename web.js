@@ -216,17 +216,15 @@ app.post("/reset", async (req,res)=> {
     // Check if the email exists in the system
     let check  = await business.findEmail(email)    //checking email 
     if (check){
-        // Prompt the user to confirm if they want to change their password
-        let change = prompt("Will you change your password?(yes/no):")
-
         // Check if the user confirmed to change their password
-        if(change === "yes"){
             // Check if the new password and confirmation password match
             if (new_password === change_password){
                 // Update the user's password
                 await business.updatePassword(email,new_password)
                 // Log a success message
+                console.log(`To: ${email}`)
                 console.log(`Your password has been changed to ${req.body.new_password} sucessfully, congratulation! You can continue to navigate now.`)
+                console.log(`Thank you and have a good day,\nCat feeding System.`)
                 // Redirect to the home page with a success message
                 res.redirect("/?message=Password Reset is complete!")
             }else{
@@ -236,12 +234,6 @@ app.post("/reset", async (req,res)=> {
             return
 
         }
-        else
-        {
-            // Redirect to the reset password page with an error message
-            res.redirect("/reset?message=Email has not been found here!")
-        }
-    }
     // Redirect to the reset password page with an error message
     res.redirect("/reset?message=Email has not been found here!")
   }
