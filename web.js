@@ -74,10 +74,14 @@ app.get('/dashboard', async (req, res) => {
     
     let feedingStations = await business.getCatSites();
     let locCount=await business.getCatlocations();
+    let catLocations = await business.getCatSites(); 
+    let totalCatCount = catLocations.reduce((sum, location) => sum + location.noCats, 0);
+    console.log(locCount)
+    console.log(catLocations)
+console.log(totalCatCount)
     let locount=locCount.length;
-    console.log('okish')
-    console.log(locount)
-    res.render('dashboard', {  feedingStations:feedingStations , locount:locount}); 
+    
+    res.render('dashboard', {  feedingStations:feedingStations , locount:locount, totalCatCount}); 
 
  
 })
