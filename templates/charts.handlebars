@@ -1,0 +1,71 @@
+<h2>Food Level Chart</h2>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample Chart</title>
+  <script src="vendors/chart.js/js/chart.min.js"></script>
+</head>
+<canvas id="foodLevelChart"></canvas>
+
+<script>
+  let foodLevelCtx = document.getElementById('foodLevelChart').getContext('2d');
+  // Parse the JSON string back into a JavaScript object
+  let foodLevelData = JSON.parse('{{foodLevelData}}'); 
+
+  // Chart.js configuration for food level chart
+  new Chart(foodLevelCtx, {
+    type: 'bar',
+    data: {
+      labels: foodLevelData.map(function(data) { return data.location; }),
+      datasets: [{
+        label: 'Food Level',
+        data: foodLevelData.map(function(data) { return data.foodLevel; }),
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+</script>
+
+<h2>Water Level Chart</h2>
+<canvas id="waterLevelChart"></canvas>
+
+<script>
+  let waterLevelCtx = document.getElementById('waterLevelChart').getContext('2d');
+  // Parse the JSON string back into a JavaScript object
+  let waterLevelData = JSON.parse('{{waterLevelData}}'); 
+
+  // Chart.js configuration for water level chart (similar structure as food level)
+  new Chart(waterLevelCtx, {
+    type: 'bar',
+    data: {
+      labels: waterLevelData.map(function(data) { return data.location; }),
+      datasets: [{
+        label: 'Water Level',
+        data: waterLevelData.map(function(data) { return data.waterLevel; }),
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+</script>
