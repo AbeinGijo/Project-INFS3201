@@ -36,7 +36,6 @@ app.use('/vendors', express.static(__dirname + "/vendors"))
 
 app.get('/',async (req,res) =>{
     let posts = await business.getAllPosts()
-
     res.render('home',{
         posts:posts,
             helpers:{toString}})
@@ -91,9 +90,7 @@ app.get('/dashboard', async (req, res) => {
     let locCount=await business.getCatlocations();
     let catLocations = await business.getCatSites(); 
     let totalCatCount = catLocations.reduce((sum, location) => sum + location.noCats, 0);
-    console.log(locCount)
-    console.log(catLocations)
-console.log(totalCatCount)
+
     let locount=locCount.length;
     
     res.render('dashboard', {  feedingStations:feedingStations , locount:locount, totalCatCount}); 
@@ -198,7 +195,7 @@ app.post('/register', async (req, res) =>{
     let email = req.body.email
     let pass = req.body.password
     let confirmpass = req.body.confirm
-    // let accType = req.body.account_type
+    let accType = "standard"
     // console.log(accType)
     
     // Check if any of the required fields are empty

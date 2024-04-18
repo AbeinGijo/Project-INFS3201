@@ -205,7 +205,7 @@ async function getAllPosts(){
     let resultData = await result.toArray()
     let z=[]
     for (c of resultData){
-        z.push({noCats:Number(c.noCats),location:c.location,status:c.status,image:c.image})
+        z.push({noCats:Number(c.noCats),location:c.location,image:c.image})
     }
     return z
 
