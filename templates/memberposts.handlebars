@@ -8,7 +8,6 @@
 }
 
 .card {
-    margin-top: 10%;
     width: 100%;
     border: 1px solid white; /* Add border to represent grid lines */
 }
@@ -131,27 +130,29 @@
       </div>
     </header>
     <div class="body flex-grow-1 px-3" id="body">
-        {{#each data}}
-        <div class="card" style="width: 18rem;">
-            {{#if image}}
-                <img src="data:{{contentType}};base64,{{toString image}}">
-            {{else}}
-                <img src="" alt="No Image">
-            {{/if}}
+      {{#each data}}
+      <div class="card border-primary mb-3 " style="width: 20rem;"><span class="border border-2 border-info" ></span>
+        {{#if image}}
+            <img src="data:{{contentType}};base64,{{toString image}}" >
+            <span class="border-bottom border-bottom-primary"></span>
+        {{else}}
+            <img src="" alt="No Image">
+        {{/if}}
 
 
-            <div class="card-body">
-            <h5 class="card-title">{{location}}</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-
-            </div>
-            <ul class="list-group list-group-flush">
-    <li class="list-group-item">An item</li>
-    <li class="list-group-item">A second item</li>
-    <li class="list-group-item">A third item</li>
-  </ul>
-        </div>
-        {{/each}}
+        <div class="card-body">
+        <h5 class="card-title">{{location}}</h5>
+        
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Last Visit Date: {{lastVisitDate}}</li>
+          <li class="list-group-item">Number of cats: {{size}}</li>
+          <li class="list-group-item">Food(kg): {{foodLevel}}</li>
+          <li class="list-group-item">Water(l): {{waterLevel}}</li>
+          <li class="list-group-item">Status: {{status}}</li>
+        </ul>
+      </div>
+      </div>
+      {{/each}}
     
         
     </div>
