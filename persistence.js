@@ -61,6 +61,7 @@ async function deleteSession(key){
 }
 
 
+
 async function updateSession(sd){
     await connectDatabase()
     // Replace the existing session document in the database with the new session document

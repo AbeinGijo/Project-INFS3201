@@ -311,15 +311,21 @@ app.get('/urgent', async (req, res) => {
     let foodData = []
     let location=await business.getCatlocations()
     let waterData=[]
+    let catData=[]
     for(c of catLocations){
         foodData.push(c.foodLevel)
         waterData.push(c.waterLevel)
+        catData.push(c.noCats)
+
     }
 
     res.render('charts',{layout:undefined,
                         foodData:foodData,
                         waterData:waterData,
-                        location:location
+                        location:location,
+
+                        catData:catData,
+
                     });
 
   });
