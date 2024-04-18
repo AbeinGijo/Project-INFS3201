@@ -256,6 +256,19 @@ app.post("/reset", async (req,res)=> {
   }
 )
 
+async function isAuthenticated(key) {
+    if (!key) {
+        return false
+    }
+
+    let sd = await business.getSession(key)
+    if (!sd) {
+        return false
+    }
+
+    return sd
+}
+
 app.get('/urgent', async (req, res) => {
     console.log("Urgent  requested");
     let sessionKey = req.cookies.session;
