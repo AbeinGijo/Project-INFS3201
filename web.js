@@ -293,9 +293,11 @@ app.get('/urgent', async (req, res) => {
     let foodData = []
     let location=await business.getCatlocations()
     let waterData=[]
+
     for(c of catLocations){
         foodData.push(c.foodLevel)
         waterData.push(c.waterLevel)
+
     }
 
     res.render('charts',{layout:undefined,
