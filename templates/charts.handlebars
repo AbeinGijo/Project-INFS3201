@@ -126,6 +126,7 @@
       <div class="charts">
         <canvas id="foodChart" ></canvas>
         <canvas id="waterChart" ></canvas>
+        <canvas id="catChart"></canvas>
       </div>
 
       <div class="container-lg">
@@ -150,7 +151,7 @@
     let locations=[{{#each location}}`{{this}}`,{{/each}}]
     let foodData = [{{#each foodData}}{{this}},{{/each}}]
     let waterData = [{{#each waterData}}{{this}},{{/each}}]
- let catData = [{{#each noCats}}`{{this}}`,{{/each}}]
+ let catData = [{{#each catData}}{{this}},{{/each}}]
 
 
     let foodChart = new Chart(document.getElementById('foodChart'), {
@@ -202,17 +203,17 @@
         datasets: [{
           label: 'Number of Cats ',
           data: catData,
-         backgroundColor: [
-  'rgba(255, 99, 132, 0.8)', 
-  'rgba(54, 162, 235, 0.8)',
-  'rgba(255, 205, 86, 0.8)',
-  'rgba(75, 192, 192, 0.8)', 
-  'rgba(255, 159, 64, 0.8)', 
-  'rgba(153, 102, 255, 0.8)', 
-  'rgba(201, 203, 207, 0.8)', 
-  'rgba(0, 128, 128, 0.8)', 
-  'rgba(255, 128, 0, 0.8)', 
-  'rgba(128, 0, 128, 0.8)', 
+backgroundColor: [
+  'rgba(255, 192, 203, 0.8)', // Light Pink
+  'rgba(144, 238, 144, 0.8)', // Light Green
+  'rgba(250, 128, 114, 0.8)', // Coral Pink
+  'rgba(128, 128, 128, 0.8)', // Grey
+  'rgba(255, 255, 0, 0.8)', // Yellow
+  'rgba(0, 255, 127, 0.8)', // Light Green (different shade)
+  'rgba(100, 149, 237, 0.8)', // Cornflower Blue
+  'rgba(208, 108, 140, 0.8)', // Rosy Brown
+  'rgba(139, 69, 19, 0.8)', // Dark Brown
+  'rgba(0, 138, 230, 0.8)', // Dark Blue
 ],
           borderColor: [
             'rgb(255, 99, 132)',
