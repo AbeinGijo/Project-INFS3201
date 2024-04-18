@@ -150,7 +150,8 @@
     let locations=[{{#each location}}`{{this}}`,{{/each}}]
     let foodData = [{{#each foodData}}{{this}},{{/each}}]
     let waterData = [{{#each waterData}}{{this}},{{/each}}]
-    console.log(waterData)
+ let catData = [{{#each noCats}}`{{this}}`,{{/each}}]
+
 
     let foodChart = new Chart(document.getElementById('foodChart'), {
       type: 'bar',
@@ -159,6 +160,48 @@
         datasets: [{
           label: 'Food Amount',
           data: foodData,
+         backgroundColor: [
+  'rgba(255, 99, 132, 0.8)', 
+  'rgba(54, 162, 235, 0.8)',
+  'rgba(255, 205, 86, 0.8)',
+  'rgba(75, 192, 192, 0.8)', 
+  'rgba(255, 159, 64, 0.8)', 
+  'rgba(153, 102, 255, 0.8)', 
+  'rgba(201, 203, 207, 0.8)', 
+  'rgba(0, 128, 128, 0.8)', 
+  'rgba(255, 128, 0, 0.8)', 
+  'rgba(128, 0, 128, 0.8)', 
+],
+          borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
+            'rgb(153, 102, 255)',
+            'rgb(201, 203, 207)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        }
+      }
+    });
+    
+    let catChart = new Chart(document.getElementById('catChart'), {
+      type: 'bar',
+      data: {
+        labels: locations,
+        datasets: [{
+          label: 'Number of Cats ',
+          data: catData,
          backgroundColor: [
   'rgba(255, 99, 132, 0.8)', 
   'rgba(54, 162, 235, 0.8)',
