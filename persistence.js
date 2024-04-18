@@ -61,16 +61,16 @@ async function deleteSession(key){
 }
 
 
-async function updateSession(sessionKey, updateSessionData){
+
+async function updateSession(sd){
     await connectDatabase()
     // Replace the existing session document in the database with the new session document
-    await session.updateOne({$sessionKey: sessionKey},
-        {$set: updateSessionData});
+    await session.replaceOne({ key: sd.key}, sd)
 }
 
-async function validateSession(key) {
+async function validateSession(sessionKey) {
     await connectDatabase();
-    let result = await session.findOne({ sessionKey: key });
+    let result = await session.findOne({ key: sessionKey });
     return result;
   }
 

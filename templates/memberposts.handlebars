@@ -85,6 +85,12 @@
       </div>
     </header>
     <div class="body flex-grow-1 px-3" id="body">
+      {{#if message}}
+      <div class="alert alert-primary" role="alert">
+        <strong>{{message}}</strong>
+      </div>
+      
+    {{/if}}
       {{#each data}}
       <div class="card border-primary mb-3 " style="width: 20rem;"><span class="border border-2 border-info" ></span>
         {{#if image}}

@@ -33,7 +33,7 @@ app.get('/',async (req,res) =>{
 })
 
 
-app.get('/login',(req,res) =>{
+app.get('/login',async (req,res) =>{
     let message=req.query.message
     let session= req.query.session
     res.render('login',{layout:undefined,
@@ -120,10 +120,15 @@ app.get('/member',async(req,res) =>{
         return
     }
     let catloc=await business.getCatlocations()
-    res.render('member',{pageTitle:'Member Page',catloc:catloc,message:req.query.message})
+    let csrf = await business.generateToken(sd)
+    res.render('member',{pageTitle:'Member Page',
+                        catloc:catloc,
+                        message:req.query.message,
+                        csrfToken:csrf})
 
 })
 
+app.use('/member', bodyParser.urlencoded({extended:false}))
 app.post('/member',upload.single('image'),async(req,res) =>{
     let sessionKey = req.cookies.session
     if (!sessionKey) {
@@ -137,11 +142,27 @@ app.post('/member',upload.single('image'),async(req,res) =>{
     }
     
     let data= req.body
+    let token= data.csrfToken
+
+    if (!sd.csrfToken) {
+        res.status(419)
+        res.send('/member?message=CSRF token Problem')
+        return
+    }
+
+    if (sd.csrfToken != token) {
+        res.status(419)
+        res.redirect('/member?message=CSRF token Mismatch')
+        return
+    }
+    
+    delete data.csrfToken
     data.username=sd.data.username
 
     let file = req.file
     if(await business.uploadReport(data,file)){
-        res.redirect('/member?message=Report Uploaded')
+        await business.cancelToken(sessionKey)
+        res.redirect('/myposts?message=Report Uploaded')
     }
 
 })    
@@ -271,9 +292,6 @@ app.get('/urgent', async (req, res) => {
   });
 
 
-  function jsonify(x){
-    return JSON.stringify(x)
-}
   app.get('/charts', async (req, res) => {
     let sessionKey = req.cookies.session;
   
@@ -306,8 +324,9 @@ app.get('/urgent', async (req, res) => {
                         foodData:foodData,
                         waterData:waterData,
                         location:location,
+
                         catData:catData,
-                        helpers:{jsonify}
+
                     });
 
   });

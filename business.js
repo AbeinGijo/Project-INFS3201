@@ -73,29 +73,25 @@ async function terminateSession(key){
 }
 
 // This function is named `generateToken` and takes one argument `sessionID`
-async function generateToken(sessionID){
+async function generateToken(sd){
     // Generate a random token 
-    let token = Math.floor(Math.random()*1000000)
+    let token = crypto.randomUUID()
 
-    // Get the session data for the given sessionID
-    let sessionData = await persistence.getSession(sessionID);
 
     // Set the CSRF token for the session
-    sessionData.csrfToken = token;
-  
-    await persistence.updateSession(sessionData);
+    sd.csrfToken = token;
+    console.log(sd)
+    await persistence.updateSession(sd);
     return token;
 }
 
 // This function is named `cancelToken` and takes one argument `sessionID`
 async function cancelToken(sessionID){
-
-    let sessionData = await persistence.getSession(sessionID);
-
+    let sd = await persistence.getSession(sessionID);
     // Delete the CSRF token from the session data
-    delete sessionData.csrfToken;
-
-    await persistence.updateSession(sessionData);
+    delete sd.csrfToken;
+    console.log(sd)
+    await persistence.updateSession(sd);
 }
 
 
