@@ -324,10 +324,7 @@ app.get('/urgent', async (req, res) => {
                         foodData:foodData,
                         waterData:waterData,
                         location:location,
-
-                        catData:catData,
-
-                    });
+                        catData:catData});
 
   });
   
