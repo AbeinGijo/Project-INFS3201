@@ -98,6 +98,10 @@ async function uploadReport(data,file){
     return await persistence.uploadReport(data,file)
 }
 
+async function getCatlocations(){
+    return await persistence.getCatlocations()
+}
+
 
 module.exports = {
     findEmail,
@@ -109,6 +113,7 @@ module.exports = {
     getUrgentSites,uploadReport,
     registerAccount,
     updateNewuser,
-    getMyPosts
+    getMyPosts,
+    getCatlocations
 
 }

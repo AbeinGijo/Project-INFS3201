@@ -153,6 +153,17 @@ async function insertUrgent(loc,cat,issue){
     return
 }
 
+async function getCatlocations(){
+    await connectDatabase()
+    let result = await catloc.find()
+    let resultData = await result.toArray()
+    let locs= []
+    for(let loc of resultData){
+        locs.push(loc.location)
+    }
+    return locs
+}
+
 module.exports = {
     startSession,
     findEmail,
@@ -165,5 +176,6 @@ module.exports = {
     getCatSites,
     getUrgentSites,uploadReport,
     registerAccount,
-    getMyPosts
+    getMyPosts,
+    getCatlocations
 }

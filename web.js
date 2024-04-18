@@ -97,8 +97,9 @@ app.get('/member',async(req,res) =>{
         res.redirect("/login?session=true")
         return
     }
-    
-    res.render('member',{pageTitle:'Member Page'})
+    let catloc=await business.getCatlocations()
+    console.log(catloc)
+    res.render('member',{pageTitle:'Member Page',catloc:catloc})
 
 })
 app.post('/member',upload.single('image'),async(req,res) =>{
