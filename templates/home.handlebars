@@ -9,7 +9,7 @@
 <html lang="en">
   <head>
    
-    <title>Admin Dashboard</title>
+    <title>HomePage</title>
     <base href="./">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -51,6 +51,20 @@
 <style>h2,h3{
     text-decoration: underline;
 }
+#body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+
+    padding: 20px; /* Add padding for better visibility */
+}
+
+.card {
+    width: 100%;
+    border: 1px solid white; /* Add border to represent grid lines */
+    color: black;
+}
+
 
 </style>
     <div class="container-fluid">
@@ -110,21 +124,30 @@
         </div>
         <br>
           <div class="p-5 text-center text-bg-primary border border-dark rounded -3">
-                <div class="container py-5">
-                   
+            <h3>Posts</h3>
+                <div class="container py-5" id="body">
+                  
+                  {{#each posts}}
+                    <div class="card border-primary mb-3 " style="width: 20rem;"><span class="border border-2 border-info" ></span>
+                      {{#if image}}
+                          <img src="data:{{contentType}};base64,{{toString image}}" >
+                          <span class="border-bottom border-bottom-primary"></span>
+                      {{else}}
+                          <img src="assets/noImage.jpg" alt="No Image">
+                      {{/if}}
+                      <div class="card-body">
+                          <h5 class="card-title">{{location}}</h5>
+                      
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item col-lg-8 mx-auto lead"><strong>Number of cats:  {{noCats}}</strong></li>
+                        <li class="list-group-item col-lg-8 mx-auto lead"><strong> Status: {{status}}</strong></li>
+                      </ul>
+                    </div>
+                    </div>
+                  {{/each}} 
                     <p class="col-lg-8 mx-auto lead">
                         
-  <h3>Our Approach</h3>
-  <br>
-  <p>This website utilizes technology to empower volunteers and streamline the process of caring for stray cats. By providing a user-friendly platform for information sharing and collaboration, we aim to:</p>
-  <ul>
-    <li>Reduce food waste and ensure consistent feeding: Volunteers can track food levels and coordinate efforts to ensure cats have access to a reliable source of nourishment.</li>
-    <li>Identify and address health concerns: Early detection of potential health issues in stray cats allows for timely intervention and treatment by the shelter.</li>
-    <li>Promote responsible cat care: The website offers educational resources to raise awareness about responsible cat ownership and the importance of spaying and neutering.</li>
-  </ul>
-
-
-  </p>
+  
                 </div>
                 
             </div>
