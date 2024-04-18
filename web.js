@@ -40,7 +40,7 @@ app.post('/login',async(req,res) =>{
     if (session) {
         if(session.data.type==='admin'){
             res.cookie('session', session.key, {expires: session.expiry})
-            res.redirect('/admin')
+            res.redirect('/dashboard')
         }
         else if(session.data.type==='standard'){
             res.cookie('session', session.key, {expires: session.expiry})
@@ -67,9 +67,13 @@ app.get('/dashboard', async (req, res) => {
       return;
     }
   
- 
+    
     let feedingStations = await business.getCatSites();
-    res.render('dashboard', {  feedingStations }); 
+    let locCount=await business.getCatlocations();
+    let locount=locCount.length;
+    console.log('okish')
+    console.log(locount)
+    res.render('dashboard', {  feedingStations:feedingStations , locount:locount}); 
 
  
 })
@@ -243,27 +247,6 @@ app.post("/reset", async (req,res)=> {
 
 
 
-app.get('/admin', async (req, res) => {
-
-    let sessionKey = req.cookies.session;
-
-    if (!sessionKey) {
-      res.redirect('/login?session=true');
-      return;
-    }
-  
-    let sessionData = await business.getSession(sessionKey);
-    if (!sessionData || sessionData.data.type !== 'admin') {
-      res.redirect('/login?session=true');
-      return;
-    }
-  
- 
-    let feedingStations = await business.getCatSites();
-    res.render('dashboard', {  feedingStations }); 
-
- 
-})
 
 
 app.get('/urgent', async (req, res) => {
