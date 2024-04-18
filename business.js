@@ -46,6 +46,10 @@ async function getMyPosts(sd){
 }
 
 
+async function getAllPosts(){
+    return await persistence.getAllPosts()
+}
+
 async function getUrgentSites(){
     return await persistence.getUrgentSites() 
 }
@@ -87,14 +91,8 @@ async function uploadReport(data,file){
     data.lastVisitDate= new Date(data.lastVisitDate)
     data.foodLevel=Number(data.foodLevel)
     data.waterLevel=Number(data.waterLevel)
-    data.size=Number(data.size)
-    if(data.size===''|| data.size<=0){
-        data.status="Inactive"
-    }
-    else{
-        data.status="Active"
-    }
-    console.log(data)
+    data.noCats=Number(data.noCats)
+    
     return await persistence.uploadReport(data,file)
 }
 

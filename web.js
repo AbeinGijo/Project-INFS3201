@@ -20,8 +20,10 @@ app.use('/assets', express.static(__dirname + "/assets"))
 app.use('/vendors', express.static(__dirname + "/vendors"))
 
 app.get('/',async (req,res) =>{
-   
-    res.render('home')
+    let posts = await business.getAllPosts()
+    res.render('home',{
+        posts:posts
+    })
 })
 
 
@@ -104,7 +106,6 @@ app.get('/member',async(req,res) =>{
         return
     }
     let catloc=await business.getCatlocations()
-    console.log("message",req.query.message)
     res.render('member',{pageTitle:'Member Page',catloc:catloc,message:req.query.message})
 
 })
@@ -122,7 +123,6 @@ app.post('/member',upload.single('image'),async(req,res) =>{
     }
     
     let data= req.body
-    console.log(data)
     data.username=sd.data.username
 
     let file = req.file
