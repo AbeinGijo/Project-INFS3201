@@ -49,21 +49,25 @@
   </head>
 
     <style>
-      #error{
-        color: rgb(215, 37, 37);
+            body {
+        background-color: #21c8de;
+      }
+        .lead{
         text-align: center;
       }
-      .lead{
-        text-align: center;
-      }
-      .rowg-3{
-        text-align: center;
-      }
-      .col-md-6{
+           .col-md-6{
         text-align: center;
         align-items: center;
         justify-items: center;
       }
+            #error{
+        color: rgb(215, 37, 37);
+        text-align: center;
+      }
+     .rowg-3{
+        text-align: center;
+      }
+
     </style>
 
   </head>
@@ -114,19 +118,7 @@
                       <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
                     </svg></span>
                   <input class="form-control" type="password" name="confirm" placeholder="Confirm password">
-                </div>
-
-                {{!-- <!-- Account type section -->
-                <div class="rowg-3">
-                    <h3>Account Type</h3>
-                    <div class="col-md-6 text-center">
-                        <!-- Radio buttons for account type selection -->
-                        <input type="radio" name="account_type" value="admin" required> Admin &nbsp;
-                        <input type="radio" name="account_type" value="standard" required> Member
-                    </div>
-                </div>
-                <br></br> --}}
-
+                </div>               
                 <!-- Submit button -->
                 <input class="btn btn-block btn-success" type="submit" value="Create new Account?">
                 </form>
@@ -141,6 +133,5 @@
     <script src="/static/vendors/simplebar/js/simplebar.min.js"></script>
     <script>
     </script>
-
   </body>
 </html>
